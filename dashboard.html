@@ -11,13 +11,13 @@
         <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
         <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
         <link href="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"/>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.js" type="text/javascript"/>
-        <script src="js/textunicodevalidator.js" type="text/javascript"/>
-        <script src="js/bootstrap.js" type="text/javascript"/>
-        <script src="js/bootstrap-datepicker.js" type="text/javascript" />
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js" type="text/javascript" />
-        <script src="js/app.js" type="text/javascript"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.js" type="text/javascript"></script>
+        <script src="js/textunicodevalidator.js" type="text/javascript"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/bootstrap-datepicker.js" type="text/javascript" ></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="js/app.js" type="text/javascript"></script>
         <script type="text/javascript">
 
         var content = {
@@ -37,7 +37,7 @@
         }
 
         $(document).ready(function(){
-            content.init()
+            content.init();
             $("#coco_nav a").click(function(e){
                 e.preventDefault(); 
                 content.change(this);
@@ -62,7 +62,7 @@
                     Sync Settings
                 </div>
                 <div id="coco_nav" class="span1">
-                    <ul classnav nav-stacked">
+                    <ul class="nav nav-stacked">
                         <li><a href="#video_list">Videos</a></li>
                         <li><a href="#mediator_list">Mediators</a></li>
                         <li><a href="#group_list">Groups</a></li>
@@ -884,7 +884,7 @@
                             </fieldset>
                         </form>
                     </div>
-                    <div class="tab-pane" id="mediator_tab">
+                    <div  id="mediator_tab">
                         <form id="mediator_form" name="mediator_form">
                             <fieldset>
                                 <legend>Add Mediator</legend> <label><b>Name*</b></label> <input name="name" type="text" placeholder="Mediator Name"> <label><b>Gender*</b></label> <select name="gender">
@@ -909,7 +909,7 @@
                             </fieldset>
                         </form>
                     </div>
-                    <div class="tab-pane" id="group_tab">
+                    <div  id="group_tab">
                         <form id="group_form" name="group_form">
                             <fieldset>
                                 <legend>Add Group</legend> Name* <input name="name" type="text" placeholder="Group Name"> <label><b>Village*</b></label> <select name="village">
@@ -1629,7 +1629,7 @@
                             </fieldset>
                         </form>
                     </div>
-                    <div class="tab-pane" id="person_tab">
+                    <div  id="person_tab">
                         <form>
                             <fieldset>
                                 <legend>Add Person</legend> <label><b>Name*</b></label> <input type="text" placeholder="Village Name"> <label><b>Father Name*</b></label> <input type="text" placeholder="Father Name"> <label><b>Village*</b></label> <select>
@@ -1664,7 +1664,7 @@
                             </fieldset>
                         </form>
                     </div>
-                    <div class="tab-pane" id="screening_tab">
+                    <div  id="screening_tab">
                         <form>
                             <fieldset>
                                 <legend>Add Screening</legend> <label><b>Date*</b></label> <input type="text" placeholder="Date"> <label><b>Start Time*</b></label> <input type="text" placeholder="Start Time"> <label><b>End Time*</b></label> <input type="text" placeholder="End Time"> <label><b>Animator*</b></label> <select>
@@ -1804,7 +1804,7 @@
                             </fieldset><button type="submit" class="btn">Submit</button>
                         </form>
                     </div>
-                    <div class="tab-pane" id="adoption_tab">
+                    <div  id="adoption_tab">
                         <form>
                             <fieldset>
                                 <legend>Add Adoption</legend> <label>Village</label> <select>
@@ -1905,7 +1905,7 @@
                             </fieldset>
                         </form>
                     </div>
-                    <div class="tab-pane" id="video_list">
+                    <div  id="video_list">
                         <table id="video_list_table" class="table table-striped display dataTable" aria-describedby="list_table_info">
                             <thead>
                                 <tr>
@@ -4432,7 +4432,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="mediator_list">
+                    <div  id="mediator_list">
                         <table id="mediator_list_table" class="table table-striped display dataTable">
                             <thead>
                                 <tr>
@@ -6357,7 +6357,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="person_list">
+                    <div  id="person_list">
                         <table id="person_list_table" class="table table-striped display dataTable" aria-describedby="list_table_info">
                             <thead>
                                 <tr role="row">
@@ -10383,7 +10383,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="group_list">
+                    <div  id="group_list">
                         <table id="group_list_table" class="table table-striped display dataTable">
                             <thead>
                                 <tr>
@@ -12005,7 +12005,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="screening_list">
+                    <div  id="screening_list">
                         <table id="screening_list_table" class="table table-striped display dataTable">
                             <thead>
                                 <tr>
@@ -13876,7 +13876,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane" id="adoption_list">
+                    <div  id="adoption_list">
                         <table id="adoption_list_table">
                             <thead>
                                 <tr>
