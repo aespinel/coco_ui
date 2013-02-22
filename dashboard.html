@@ -9,6 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="" >
         <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/coco.css" rel="stylesheet" type="text/css" />
         <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
         <link href="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
@@ -51,17 +52,19 @@
     </head>
     <body>
         <div class="container">
-            <div id="coco_sidebar" class="span3">
-                <div id="coco_brand" class="hero-unit">
+            <div id="coco_sidebar" class="span2 well">
+                <div id="coco_userinfo">
+                    Hi Sreenivas! <a href="#/logout">Log out</a>
+                </div>
+                <div id="coco_brand">
                     COCO
                 </div>
-                <div id="coco_userinfo">
-                    Sreenu <a href="#/logout">Log out</a>
+                <div id="coco_sync" class="row">
+                    <div class="span1 btn pull-left">Sync</div>
+                    <div class="btn pull-right" href="#"><i class="icon-wrench"></i></div>
                 </div>
-                <div id="coco_sync">
-                    Sync Settings
-                </div>
-                <div id="coco_nav" class="span1">
+                
+                <div id="coco_nav" class="pull-left">
                     <ul class="nav nav-stacked">
                         <li><a href="#video_list">Videos</a></li>
                         <li><a href="#mediator_list">Mediators</a></li>
@@ -71,30 +74,30 @@
                         <li><a href="#adoption_list">Adoption</a></li>
                     </ul>
                 </div>
-                <div id="coco_nav_add" class="span1">
+                <div id="coco_nav_add" class="pull-right">
                     <ul class="nav nav-stacked">
-                        <li><a href="#video_tab">Add</a></li>
-                        <li><a href="#mediator_tab">Add</a></li>
-                        <li><a href="#group_tab">Add</a></li>
-                        <li><a href="#person_tab">Add</a></li>
-                        <li><a href="#screening_tab">Add</a></li>
-                        <li><a href="#adoption_tab">Add</a></li>
+                        <li><a href="#video_tab"><i class="icon-plus-sign"></i></a></li>
+                        <li><a href="#mediator_tab"><i class="icon-plus-sign"></i></a></li>
+                        <li><a href="#group_tab"><i class="icon-plus-sign"></i></a></li>
+                        <li><a href="#person_tab"><i class="icon-plus-sign"></i></a></li>
+                        <li><a href="#screening_tab"><i class="icon-plus-sign"></i></a></li>
+                        <li><a href="#adoption_tab"><i class="icon-plus-sign"></i></a></li>
                     </ul>
                 </div>
             </div>
-            <div id="coco_content"  class="span8">
+            <div id="coco_content"  class="span9">
                     <div id="video_tab">
-                        <form id="video_form" name="video_form">
+                        <form id="video_form" name="video_form" class="coco_form">
                             <fieldset>
                                 <legend>Add Video</legend>
                                 <div class="control-group">
-                                    <label class="control-label"><b>Title*</b></label>
+                                    <label class="control-label">Title*</label>
                                     <div class="controls">
                                         <input id='title' class="input-xlarge" type='text' name='title' maxlength='200' placeholder="Video Title">
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Video Type*</b></label>
+                                    <label class="control-label">Video Type*</label>
                                     <div class="controls">
                                         <select name="video_type">
                                             <option value="" selected="selected">
@@ -119,19 +122,19 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Video Production Start Date*</b></label>
+                                    <label class="control-label">Video Production Start Date*</label>
                                     <div class="controls">
                                         <input class="input-small" id="video_production_start_date" name="video_production_start_date" type="text" placeholder="Start date">
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Video Production End Date*</b></label>
+                                    <label>Video Production End Date*</label>
                                     <div class="controls">
                                         <input class="input-small" id="video_production_end_date" name="video_production_end_date" type="text" placeholder="End date">
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Language*</b></label>
+                                    <label>Language*</label>
                                     <div class="controls">
                                         <select name="language">
                                             <option selected="selected" value="">
@@ -214,13 +217,13 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Village*</b></label>
+                                    <label>Village*</label>
                                     <div class="controls">
                                         <input name="village" type="text" placeholder="type village name" data-provide="typeahead" data-source='["vil1", "vil2", "vil3"]'>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Facilitator*</b></label>
+                                    <label>Facilitator*</label>
                                     <div class="controls">
                                         <select name="facilitator">
                                             <option selected="selected" value="">
@@ -455,7 +458,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Camera Operator*</b></label>
+                                    <label>Camera Operator*</label>
                                     <div class="controls">
                                         <select name="camera_operator">
                                             <option selected="selected" value="">
@@ -690,7 +693,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Persons Shown*</b></label>
+                                    <label>Persons Shown*</label>
                                     <div class="controls">
                                         <select size="20" multiple="multiple" class="input-xlarge" name="persons_shown">
                                             <option value="10000000055506">
@@ -826,7 +829,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Actors*</b></label>
+                                    <label>Actors*</label>
                                     <div class="controls">
                                         <select class="input-medium" name="actors">
                                             <option value="" selected="selected">
@@ -845,7 +848,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label><b>Video Suitable For*</b></label>
+                                    <label>Video Suitable For*</label>
                                     <div class="controls">
                                         <select name="video_suitable_for">
                                             <option value="" selected="selected">
@@ -887,7 +890,7 @@
                     <div  id="mediator_tab">
                         <form id="mediator_form" name="mediator_form">
                             <fieldset>
-                                <legend>Add Mediator</legend> <label><b>Name*</b></label> <input name="name" type="text" placeholder="Mediator Name"> <label><b>Gender*</b></label> <select name="gender">
+                                <legend>Add Mediator</legend> <label>Name*</label> <input name="name" type="text" placeholder="Mediator Name"> <label>Gender*</label> <select name="gender">
                                     <option>
                                         Female
                                     </option>
@@ -912,7 +915,7 @@
                     <div  id="group_tab">
                         <form id="group_form" name="group_form">
                             <fieldset>
-                                <legend>Add Group</legend> Name* <input name="name" type="text" placeholder="Group Name"> <label><b>Village*</b></label> <select name="village">
+                                <legend>Add Group</legend> Name* <input name="name" type="text" placeholder="Group Name"> <label>Village*</label> <select name="village">
                                     <option value="" selected="selected">
                                         ---------
                                     </option>
@@ -1632,7 +1635,7 @@
                     <div  id="person_tab">
                         <form>
                             <fieldset>
-                                <legend>Add Person</legend> <label><b>Name*</b></label> <input type="text" placeholder="Village Name"> <label><b>Father Name*</b></label> <input type="text" placeholder="Father Name"> <label><b>Village*</b></label> <select>
+                                <legend>Add Person</legend> <label>Name*</label> <input type="text" placeholder="Village Name"> <label>Father Name*</label> <input type="text" placeholder="Father Name"> <label>Village*</label> <select>
                                     <option>
                                         Village 1
                                     </option>
@@ -1642,14 +1645,14 @@
                                     <option>
                                         Village 3
                                     </option>
-                                </select> <label><b>Gender*</b></label> <select>
+                                </select> <label>Gender*</label> <select>
                                     <option>
                                         Female
                                     </option>
                                     <option>
                                         Male
                                     </option>
-                                </select> <label><b>Age*</b></label> <input class="input-mini" type="text" placeholder="Age"> <label>Phone Number</label> <input type="text" placeholder="Phone Number"> <label><b>Group*</b></label> <select>
+                                </select> <label>Age*</label> <input class="input-mini" type="text" placeholder="Age"> <label>Phone Number</label> <input type="text" placeholder="Phone Number"> <label>Group*</label> <select>
                                     <option>
                                         Group 1
                                     </option>
@@ -1667,7 +1670,7 @@
                     <div  id="screening_tab">
                         <form>
                             <fieldset>
-                                <legend>Add Screening</legend> <label><b>Date*</b></label> <input type="text" placeholder="Date"> <label><b>Start Time*</b></label> <input type="text" placeholder="Start Time"> <label><b>End Time*</b></label> <input type="text" placeholder="End Time"> <label><b>Animator*</b></label> <select>
+                                <legend>Add Screening</legend> <label>Date*</label> <input type="text" placeholder="Date"> <label>Start Time*</label> <input type="text" placeholder="Start Time"> <label>End Time*</label> <input type="text" placeholder="End Time"> <label>Animator*</label> <select>
                                     <option>
                                         Animator 1
                                     </option>
@@ -1677,7 +1680,7 @@
                                     <option>
                                         Animator 3
                                     </option>
-                                </select> <label><b>Village*</b></label> <select>
+                                </select> <label>Village*</label> <select>
                                     <option>
                                         Village 1
                                     </option>
@@ -1687,7 +1690,7 @@
                                     <option>
                                         Village 3
                                     </option>
-                                </select> <label><b>Videos Screened*</b></label> <select multiple="multiple">
+                                </select> <label>Videos Screened*</label> <select multiple="multiple">
                                     <option>
                                         Video 1
                                     </option>
@@ -1697,7 +1700,7 @@
                                     <option>
                                         Video 3
                                     </option>
-                                </select> <label><b>Groups Attended*</b></label>
+                                </select> <label>Groups Attended*</label>
                                 <div>
                                     <select>
                                         <option>
@@ -1748,7 +1751,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td></td>
+                                            <td><i class="icon-remove"></i></td>
                                             <td>
                                                 <label>1</label>
                                             </td>
@@ -1774,7 +1777,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td></td>
+                                            <td><i class="icon-remove"></td>
                                             <td>
                                                 <label>2</label>
                                             </td>
@@ -1817,7 +1820,7 @@
                                     <option>
                                         Village 3
                                     </option>
-                                </select> <label>Group</label>
+                                </select><label>Group</label>
                                 <div>
                                     <select>
                                         <option>
@@ -1829,7 +1832,8 @@
                                         <option>
                                             Group 3
                                         </option>
-                                    </select> <select>
+                                    </select>
+                                    <select>
                                         <option>
                                             Group 2
                                         </option>
@@ -1861,7 +1865,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td></td>
+                                                <td><i class="icon-remove"></td>
                                                 <td>
                                                     <input type="text" value="person 1">
                                                 </td>
@@ -1880,7 +1884,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
+                                                <td><i class="icon-remove"></td>
                                                 <td>
                                                     <input type="text" value="person 2">
                                                 </td>
