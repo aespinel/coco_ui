@@ -5,7 +5,10 @@
          $.validator.addMethod('validateDate',
            validateDate, 'Enter the date in the format of yyyy-mm-dd.'
          );
-         
+         $.validator.addMethod('validateTime',
+             validateTime, 'Enter the time in the format of hh:mm in 24 hours format'
+           );
+         //Date fields init
          $('#video_production_start_date').datepicker({
 				format: 'yyyy-mm-dd'
 			});
@@ -15,7 +18,24 @@
          $('#approval_date').datepicker({
 				format: 'yyyy-mm-dd'
 			});
-         
+         $('#date_screening').datepicker({
+				format: 'yyyy-mm-dd'
+			});
+         $("#date_screening").focusout(function () {
+        	 $('#date_screening').datepicker('hide');
+        	});
+         //time fields init
+         $('#start_time_picker').timepicker({
+             minuteStep: 1,
+             defaultTime: false,
+             showMeridian: false
+         });
+         $('#end_time_picker').timepicker({
+        	 minuteStep: 1,
+        	 defaultTime: false,
+             showMeridian: false
+         });
+         //data table init
          $('#person_list_table').dataTable();
          $('#video_list_table').dataTable();
          $('#mediator_list_table').dataTable();
@@ -23,6 +43,96 @@
          $('#screening_list_table').dataTable();
          $('#adoption_list_table').dataTable();
          
+         animator_select_json= {"villages": [{"name": "Bhallapur", "id": 10000000000337}, 
+                                             {"name": "Dhanurjayapuram", "id": 10000000000339}], 
+                                             "groups": [{"name": "CHASI DALA", "id": 10000000000783}, 
+                                                        {"name": "DANGAR KRUSAKA SANGA", "id": 10000000000674}, {"name": "KRUSHAKA SANGHA", "id": 10000000000843}], "persons": [{"name": "CHASI AMMA", "id": 10000000000783}, 
+                                                                                                                                                                               {"name": "Ajju Bai", "id": 10000000000674}, {"name": "KRUSHAKA RAM", "id": 10000000000843}]}
+         //alert(animator_select_json.villages.length);
+         //alert(animator_select_json.villages[0]);
+         $("#id_animator_screening").change(function() {
+        	 var vil_options = '<option value="">---------- </option>';
+    	     for (var i = 0; i < animator_select_json.villages.length; i++) {
+    	    	 //console.log(animator_select_json.villages[i].id);
+    	    	 vil_options += '<option value="' + parseInt(animator_select_json.villages[i].id) + '">' + animator_select_json.villages[i].name + '</option>';
+         	  }
+    	      $("#id_village_screening").html(vil_options);
+    	      console.log(vil_options);
+         });
+         $("#id_village_screening").change(function() {
+    	      
+    	     var group_options = '';
+     	     for (var i = 0; i < animator_select_json.groups.length; i++) {
+     	    	 //console.log(animator_select_json.villages[i].id);
+     	    	group_options += '<option value="' + parseInt(animator_select_json.groups[i].id) + '">' + animator_select_json.groups[i].name + '</option>';
+          	  }
+     	      $("#id_group_screening").html(group_options);
+     	      
+     	     var person_options = '';
+     	     for (var i = 0; i < animator_select_json.groups.length; i++) {
+     	    	 //console.log(animator_select_json.villages[i].id);
+     	    	person_options += '<option value="' + parseInt(animator_select_json.persons[i].id) + '">' + animator_select_json.persons[i].name + '</option>';
+          	  }
+     	      $("#id_person_screening").html(person_options);
+         });
+         
+         
+         $('#id_group_screening').click(function(){
+        	 group_name = $('#id_group_screening option:selected').html();
+        	 if(group_name) {
+	        	 $('#id_group_screening option:selected').appendTo('#id_group_screening_right');
+	        	 var persons_details = {"persons_in_group": 
+	         		   [{"name": "Bhallapur", "id": 10000000000337, "videos_seen":[{"title": "SRI", "id":10000000000337}]}, 
+	         	       {"name": "Dhanurjayapuram", "id": 10000000000336, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "Dhanur", "id": 10000000000335, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "Dha", "id": 10000000000334, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "yapuram", "id": 10000000000333, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "uram", "id": 10000000000332, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "Dhanuram", "id": 10000000000331, "videos_seen":[{"title": "SRI", "id":10000000000337}]},]
+	         	   }
+	         	  // pma_table = "";
+	         	   for (var i = 0; i < persons_details.persons_in_group.length; i++) {
+	        	    	 //console.log(animator_select_json.villages[i].id);
+	         		  // pma_table += '<option value="' + parseInt(animator_select_json.persons[i].id) + '">' + animator_select_json.persons[i].name + '</option>';
+	         		   $('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+persons_details.persons_in_group[i].name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td > <div class="control-group"><div class="controls"><input name="question_asked_'+persons_details.persons_in_group[i].id+'" type="text" maxlength="500"> </div></div></td> <td> <input type="checkbox"> </td> </tr>');
+	             	}
+	         	   update_table();
+	         	   add_remove_handler();
+        	 }
+        	});
+         
+         $('#id_person_screening').click(function(){
+           person_name = $('#id_person_screening option:selected').html();
+           person_id = $('#id_person_screening option:selected').val();
+       	   if(person_name) {
+	       		$('#id_person_screening option:selected').appendTo('#id_person_screening_right');
+	        	$('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+person_name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td> <input name="question_asked_'+person_id+'" type="text" maxlength="500"> </td> <td> <input type="checkbox"> </td> </tr>');
+	       		update_table();
+	       		add_remove_handler();
+       	   }
+         });
+         	//For de selection of entries
+        	/*$('#id_group_screening_right').click(function(){
+        	    $('#id_group_screening_right option:selected').appendTo('#id_group_screening');
+        	});*/
+        	
+        function add_remove_handler() {
+        	$('.remove').click( function() {
+               	$(this).closest('tr').remove();
+               	update_table();
+             });
+        }
+         
+        function update_table() {
+        	var i=0;
+        	$("#pma_table tbody tr").each(function (){
+        		$(this).find("td:nth-child(2)").html(i);
+        		//add validation rule for question asked
+        		console.log($(this).find("td:nth-child(5) input").rules("add",{allowedChar: true}));
+        		//$("#"+$(this).attr('name')).rules("add",{maxlength: 10});
+        		i++;
+            });
+        }
          //for type ahead fields
          $("[data-provide='typeahead']").blur(function(e) {
         	    if ($('.dropdown-menu').is(":visible")) {
@@ -244,8 +354,61 @@
         			});
         	});
         });
-		
 		//end of group form validation
 		
-		
+		$("#screening_form").validate({
+			rules: {
+				date_screening: {
+					required: true,
+					validateDate: true
+				},
+				start_time_screening: {
+					required: true,
+					validateTime: true
+				},
+				end_time_screening: {
+					required: true,
+					validateTime: true
+				},
+				animator_screening:"required",
+				village_screening:"required",
+				videos_screened_screening:"required",
+				
+			},
+			messages: {
+				date_screening: {
+					required: 'Enter Screening Date',
+					validateDate: 'Enter Screening Date in the form of yyyy-mm-dd',
+				},
+				start_time_screening: {
+					required: 'Enter Video Production Start Date',
+					validateTime: 'Enter the start time in the form of hh:mm  Use 24 hour format',
+				},
+				end_time_screening: {
+					required: 'Enter Video Production End Date',
+					validateTime: 'Enter the end time in the form of hh:mm  Use 24 hour format',
+				},
+				animator_screening: "Enter Animator",
+				village_screening:"Enter Village",
+				videos_screened_screening:"Enter Videos Screened",
+			},
+			
+			highlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .addClass("error");
+
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .removeClass("error");
+
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
+		});
+	
 	});

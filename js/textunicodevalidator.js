@@ -20,13 +20,10 @@ function validateDate(value) {
 	var re = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
 	if( re.test(value)) {
 		var adata = value.split('-');
-		console.log(adata);
 		var year = parseInt(adata[0],10);
 		var month = parseInt(adata[1],10);
 		var day = parseInt(adata[2],10);
-		console.log(year,month,day);
 		var xdata = new Date(year,month-1,day);
-		console.log(xdata);
 		if ( ( xdata.getFullYear() === year ) && ( xdata.getMonth() === month - 1 ) && ( xdata.getDate() === day ) ){
 			check = true;
 		} else {
@@ -34,6 +31,19 @@ function validateDate(value) {
 		}
 	} else {
 		check = false;
+	}
+	return check;
+}
+
+function validateTime(value) {
+	var check = false;
+	var adata = value.split(':');
+	var hours = parseInt(adata[0],10);
+	var minutes = parseInt(adata[1],10);
+	if((hours > 24) && (minutes > 60)) {
+		check=false;
+	} else {
+		check = true;
 	}
 	return check;
 }
