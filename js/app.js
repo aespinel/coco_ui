@@ -36,12 +36,12 @@
              showMeridian: false
          });
          //data table init
-         $('#person_list_table').dataTable();
-         $('#video_list_table').dataTable();
-         $('#mediator_list_table').dataTable();
-         $('#group_list_table').dataTable();
-         $('#screening_list_table').dataTable();
-         $('#adoption_list_table').dataTable();
+         $('#person_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
+         $('#video_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
+         $('#mediator_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
+         $('#group_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
+         $('#screening_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
+         $('#adoption_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
          
          animator_select_json= {"villages": [{"name": "Bhallapur", "id": 10000000000337}, 
                                              {"name": "Dhanurjayapuram", "id": 10000000000339}], 
@@ -76,6 +76,52 @@
      	      $("#id_person_screening").html(person_options);
          });
          
+         $("#id_village_adoption").change(function() {
+   	      
+    	     var group_options = '';
+     	     for (var i = 0; i < animator_select_json.groups.length; i++) {
+     	    	 //console.log(animator_select_json.villages[i].id);
+     	    	group_options += '<option value="' + parseInt(animator_select_json.groups[i].id) + '">' + animator_select_json.groups[i].name + '</option>';
+          	  }
+     	      $("#id_group_adoption").html(group_options);
+     	      
+     	     var person_options = '';
+     	     for (var i = 0; i < animator_select_json.groups.length; i++) {
+     	    	 //console.log(animator_select_json.villages[i].id);
+     	    	person_options += '<option value="' + parseInt(animator_select_json.persons[i].id) + '">' + animator_select_json.persons[i].name + '</option>';
+          	  }
+     	      $("#id_person_adoption").html(person_options);
+         });
+         
+         $('#id_group_adoption').click(function(){
+        	 group_name = $('#id_group_adoption option:selected').html();
+        	 if(group_name) {
+	        	 $('#id_group_adoption option:selected').appendTo('#id_group_adoption_right');
+	        	 var persons_details = {"persons_in_group": 
+	         		   [{"name": "Bhallapur", "id": 10000000000337, "videos_seen":[{"title": "SRI", "id":10000000000337}]}, 
+	         	       {"name": "Dhanurjayapuram", "id": 10000000000336, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "Dhanur", "id": 10000000000335, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "Dha", "id": 10000000000334, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "yapuram", "id": 10000000000333, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "uram", "id": 10000000000332, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
+	         	       {"name": "Dhanuram", "id": 10000000000331, "videos_seen":[{"title": "SRI", "id":10000000000337}]},]
+	         	   }
+	         	  // pma_table = "";
+	         	   for (var i = 0; i < persons_details.persons_in_group.length; i++) {
+	        	    	 //console.log(animator_select_json.villages[i].id);
+	         		  $('#pav_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+persons_details.persons_in_group[i].name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td > <div class="control-group"><div class="controls"><input id="date_of_adoption_'+persons_details.persons_in_group[i].id+'" name="date_of_adoption_'+persons_details.persons_in_group[i].id+'" type="text"> </div></div></td></tr>');
+	         		  $('#date_of_adoption_'+persons_details.persons_in_group[i].id).datepicker({
+	  					format: 'yyyy-mm-dd'
+	         		  });
+	         		  
+	         		 $('#date_of_adoption_'+persons_details.persons_in_group[i].id).focusout(function () {
+			         	 $('#date_of_adoption_'+persons_details.persons_in_group[i].id).datepicker('hide');
+			        });
+	             	}
+	         	   update_pav_table();
+	         	   add_pav_remove_handler();
+        	 }
+        	});
          
          $('#id_group_screening').click(function(){
         	 group_name = $('#id_group_screening option:selected').html();
@@ -101,12 +147,29 @@
         	 }
         	});
          
+         $('#id_person_adoption').click(function(){
+             person_name = $('#id_person_adoption option:selected').html();
+             person_id = $('#id_person_adoption option:selected').val();
+         	   if(person_name) {
+  	       		$('#id_person_adoption option:selected').appendTo('#id_person_adoption_right');
+  	        	$('#pav_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+person_name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td > <div class="control-group"><div class="controls"><input id="date_of_adoption_'+person_id+'" name="date_of_adoption_'+person_id+'" type="text"> </div></div></td></tr>');
+  	        	update_pav_table();
+  	       		add_pav_remove_handler();
+	  	       	$('#date_of_adoption_'+person_id).datepicker({
+					format: 'yyyy-mm-dd'
+				});
+		  	    $('#date_of_adoption_'+person_id).focusout(function () {
+		         	 $('#date_of_adoption_'+person_id).datepicker('hide');
+		        });
+         	   }
+           });
+         
          $('#id_person_screening').click(function(){
            person_name = $('#id_person_screening option:selected').html();
            person_id = $('#id_person_screening option:selected').val();
        	   if(person_name) {
 	       		$('#id_person_screening option:selected').appendTo('#id_person_screening_right');
-	        	$('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+person_name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td> <input name="question_asked_'+person_id+'" type="text" maxlength="500"> </td> <td> <input type="checkbox"> </td> </tr>');
+	        	$('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+person_name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td><div class="control-group"><div class="controls"> <input name="question_asked_'+person_id+'" type="text" maxlength="500"> </div></div></td> <td> <input type="checkbox"> </td> </tr>');
 	       		update_table();
 	       		add_remove_handler();
        	   }
@@ -122,14 +185,31 @@
                	update_table();
              });
         }
+        
+        function add_pav_remove_handler() {
+        	$('.remove').click( function() {
+               	$(this).closest('tr').remove();
+               	update_pav_table();
+             });
+        }
          
         function update_table() {
-        	var i=0;
+        	var i=1;
         	$("#pma_table tbody tr").each(function (){
         		$(this).find("td:nth-child(2)").html(i);
         		//add validation rule for question asked
-        		console.log($(this).find("td:nth-child(5) input").rules("add",{allowedChar: true}));
-        		//$("#"+$(this).attr('name')).rules("add",{maxlength: 10});
+        		$(this).find("td:nth-child(5) input").rules("add",{allowedChar: true});
+        		i++;
+            });
+        }
+        
+        function update_pav_table() {
+        	var i=1;
+        	$("#pav_table tbody tr").each(function (){
+        		$(this).find("td:nth-child(2)").html(i);
+        		//add validation rule for question asked
+        		$(this).find("td:nth-child(5) input").rules("add",{required: true});
+        		$(this).find("td:nth-child(5) input").rules("add",{validateDate: true});
         		i++;
             });
         }
@@ -236,31 +316,52 @@
 		
 		$("#mediator_form").validate({
 			rules: {
-				name: {
+				name_mediator: {
 					required: true,
 					minlength: 2,
 					maxlength: 100,
 					allowedChar:true
 				},
-				gender: "required",
-				phone_number: {
+				gender_mediator: "required",
+				phone_number_mediator: {
 					digits: true,
 					maxlength: 10
-				}
+				},
+				assigned_villages_mediator: "required",
 			},
 			messages: {
-				name: {
+				name_mediator: {
 					required: 'Enter Mediator Name',
 					minlength: 'Mediator Name  should be atleast 2 characters',
 					maxlength: 'Mediator Name should be atmax 100 characters',
 					allowedChar: 'Mediator name should only contain alphabets and local language characters'
 				},
-				gender: "Enter Gender",
-				phone_number: {
+				gender_mediator: "Enter Gender",
+				phone_number_mediator: {
 					digits: 'phone number should contain only digits',
 					maxlength: "phone number should not contain more than 10 digits"
-				}
+				},
+				assigned_villages_mediator: "Enter Assigned Villages",
 			}
+			,
+			
+			highlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .addClass("error");
+
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .removeClass("error");
+
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
+
 		});
 		
 		$("#group_form").validate({
@@ -271,29 +372,7 @@
 					maxlength: 100,
 					allowedChar:true
 				},
-				village: "required",
-				person_name_1: {
-					required: true,
-					minlength: 2,
-					maxlength: 100,
-					allowedChar:true
-				},
-				father_name_1: {
-					required: true,
-					minlength: 2,
-					maxlength: 100,
-					allowedChar:true
-				},
-				age_1: {
-					digits: true,
-					min:1,
-					max:100
-				},
-				gender_1: "required",
-				phone_number_1: {
-					digits: true,
-					maxlength: 10
-				}
+				village: "required"
 			},
 			messages: {
 				name: {
@@ -302,30 +381,101 @@
 					maxlength: 'Group Name should be atmax 100 characters',
 					allowedChar: 'Group name should only contain alphabets and local language characters'
 				},
-				village: "Enter village",
-				person_name_1: {
-					required: 'Person Name is required',
-					minlength: "Person Name  should be atleast 2 characters",
-					maxlength: 'Person Name should be atmax 100 characters',
-					allowedChar: 'Person name should only contain alphabets and local language characters'
+				village: "Enter village"
+			},
+			
+			highlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .addClass("error");
+
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .removeClass("error");
+
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
+		});
+		
+		$("#person_form").validate({
+			rules: {
+				name_person: {
+					required: true,
+					minlength: 2,
+					maxlength: 100,
+					allowedChar:true
 				},
-				father_name_1: {
+				
+				father_person: {
+					required: true,
+					minlength: 2,
+					maxlength: 100,
+					allowedChar:true
+				},
+				age_person: {
+					digits: true,
+					min:1,
+					max:100
+				},
+				gender_person: "required",
+				phone_number_person: {
+					digits: true,
+					maxlength: 10
+				},
+				village_person: {
+					required: true
+				}
+			},
+			messages: {
+				name_person: {
+					required: 'Enter group Name',
+					minlength: 'Group Name  should be atleast 2 characters',
+					maxlength: 'Group Name should be atmax 100 characters',
+					allowedChar: 'Group name should only contain alphabets and local language characters'
+				},
+				father_name_person: {
 					required: 'Father Name is required',
 					minlength: "Father Name  should be atleast 2 characters",
 					maxlength: 'Father Name should be atmax 100 characters',
 					allowedChar: 'Father name should only contain alphabets and local language characters'
 				},
-				age_1: {
+				age_person: {
 					digits: "Age should contain digits only",
 					min:"Age should not be less than 1 year",
 					max:"Age should not be more than 100 years"
 				},
-				phone_number_1: {
+				phone_number_person: {
 					digits: 'phone number should contain only digits',
 					maxlength: "phone number should not contain more than 10 digits"
+				},
+				village_person: {
+					required: "Please enter village"
 				}
-			}
+			},
+			
+			highlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .addClass("error");
+
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .removeClass("error");
+
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
 		});
+
 		
 		$("#group_form table tr :input").each(function () {
         	$(this).change(function () {
@@ -342,7 +492,6 @@
             				console.log($(this).rules());
         				} else if (adata[0] == "age") {
         					$("#"+$(this).attr('name')).rules("add",{digits: true});
-        					$("#"+$(this).attr('name')).rules("add",{required: true});
             				$("#"+$(this).attr('name')).rules("add",{min: 1});
             				$("#"+$(this).attr('name')).rules("add",{max: 100});
         				} else if (adata[0] == "gender") {
@@ -410,5 +559,33 @@
             errorElement: "span",
             errorClass: "help-inline"
 		});
+
+		$("#adoption_form").validate({
+			rules: {
+				village_adoption:"required",
+				
+			},
+			messages: {
+				village_adoption:"Enter Village",
+			},
+			
+			highlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .addClass("error");
+
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element)
+                    .parent('div')
+                    .parent('div')
+                    .removeClass("error");
+
+            },
+            errorElement: "span",
+            errorClass: "help-inline"
+		});
 	
+
 	});
