@@ -25,7 +25,7 @@
 
         var content = {
             id: "#coco_content",
-            initial_div: "#video_tab",
+            initial_div: "#right_tab",
             init: function init()
             {
                 $(this.id).children("div").hide();
@@ -49,6 +49,18 @@
                 e.preventDefault();
                 content.change(this);
             });
+            $("#sync").click(function(e) {
+            	$("#coco_content").children("div").hide();
+            	$("#sync_tab").show();
+            });
+            $("#coco_icon").click(function(e) {
+            	$("#coco_content").children("div").hide();
+            	$("#right_tab").show();
+            });
+            $("#settings").click(function(e) {
+            	$("#coco_content").children("div").hide();
+            	$("#settings_tab").show();
+            });
         });
         </script>
     </head>
@@ -58,12 +70,12 @@
                 <div id="coco_userinfo">
                     Hi Sreenivas! <a href="#/logout">Log out</a>
                 </div>
-                <div id="coco_brand">
+                <div id="coco_brand" id="coco_icon">
                     COCO
                 </div>
                 <div id="coco_sync" class="row">
-                    <div class="span1 btn pull-left">Sync</div>
-                    <div class="btn pull-right" href="#"><i class="icon-wrench"></i></div>
+                    <div class="span1 btn pull-left" id="sync">Sync</div>
+                    <div class="btn pull-right" id="settings" href="#"><i class="icon-wrench"></i></div>
                 </div>
                 
                 <div id="coco_nav" class="pull-left">
@@ -88,6 +100,92 @@
                 </div>
             </div>
             <div id="coco_content"  class="span9">
+            		<div id="right_tab" >
+            			<div class="span3">
+						<h4>Downloading COCO Data</h4>
+						<ul class="unstyled">
+						    <li>Videos <span class="pull-right strong">100%</span>
+						        <div class="progress progress-important">
+						            <div class="bar" style="width: 100%;"></div>
+						        </div>
+						    </li>
+						    <li>Mediators<span class="pull-right strong">50%</span>
+						        <div class="progress progress-important">
+						            <div class="bar" style="width: 50%;"></div>
+						        </div>
+						    </li>
+						    <li>Groups<span class="pull-right strong">0%</span>
+						        <div class="progress progress-success">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    <li>Persons<span class="pull-right strong">0%</span>
+						        <div class="progress progress-success">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    <li>Screenings<span class="pull-right strong">0%</span>
+						        <div class="progress progress-success">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    <li>Adoptions<span class="pull-right strong">0%</span>
+						        <div class="progress progress-success">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						</ul>
+					</div>
+            		</div>
+                    
+                    <div id="sync_tab" >
+            			<div class="span3">
+						<h4>Uploading COCO Data</h4>
+						<ul class="unstyled">
+						    <li>Groups <span class="pull-right strong">100%</span>
+						        <div class="progress progress-important">
+						            <div class="bar" style="width: 100%;"></div>
+						        </div>
+						    </li>
+						    <li>Screenings<span class="pull-right strong">50%</span>
+						        <div class="progress progress-important">
+						            <div class="bar" style="width: 50%;"></div>
+						        </div>
+						    </li>
+						    <li>Adoptions<span class="pull-right strong">0%</span>
+						        <div class="progress progress-success">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    
+						</ul>
+						
+						<h4>Download</h4>
+						<ul class="unstyled">
+						    <li>Groups(10) <span class="pull-right strong">0%</span>
+						        <div class="progress progress-important">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    <li>Screenings(30)<span class="pull-right strong">0%</span>
+						        <div class="progress progress-important">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    <li>Adoptions(50)<span class="pull-right strong">0%</span>
+						        <div class="progress progress-success">
+						            <div class="bar" style="width: 0%;"></div>
+						        </div>
+						    </li>
+						    
+						</ul>
+					</div>
+            		</div>
+                    
+                    <div id="settings_tab">
+                    	<div class="btn btn-success">Reset Download</div>
+                    	<div class="btn btn-success">Sync Status</div>
+                    </div>
                     <div id="video_tab">
                         <form id="video_form" name="video_form" class="coco_form">
                             <fieldset>
@@ -124,16 +222,18 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Video Production Start Date*</label>
+                                    <label class="control-label">Production Start Date*</label>
                                     <div class="controls">
                                         <input class="input-small" id="video_production_start_date" name="video_production_start_date" type="text" placeholder="Start date">
                                     </div>
+                                    <span class="help-block">Date should be in the format of yyyy-mm-dd</span>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Video Production End Date*</label>
+                                    <label class="control-label">Production End Date*</label>
                                     <div class="controls">
                                         <input class="input-small" id="video_production_end_date" name="video_production_end_date" type="text" placeholder="End date">
                                     </div>
+                                    <span class="help-block">Date should be in the format of yyyy-mm-dd</span>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Language*</label>
@@ -220,7 +320,9 @@
                                 <div class="control-group">
                                     <label class="control-label">Village*</label>
                                     <div class="controls">
-                                        <input name="village" type="text" placeholder="type village name" data-provide="typeahead" data-source='["vil1", "vil2", "vil3"]'>
+                                        <select name="village">
+                                        	<option value="">---------- </option><option value="10000000000337">Bhallapur</option><option value="10000000000339">Dhanurjayapuram</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -878,6 +980,7 @@
                                     <div class="controls">
                                         <input class="input-small" id="approval_date" name="approval_date" type="text" placeholder="Approval Date">
                                     </div>
+                                    <span class="help-block">Date should be in the format of yyyy-mm-dd</span>
                                 </div>
                                 <div class="control-group">
                                     <label>Youtube Id</label>
@@ -1733,7 +1836,7 @@
 	                                 </div>
                                  </div>
                                  <div class="control-group"> 
-	                                 <label class="control-label">Group*</label> 
+	                                 <label >Group</label> 
 	                                 <div class="controls">
 	                                 <select name="group_person">
 	                                    <option>
@@ -1762,6 +1865,7 @@
                                 	<div class="controls">
                                  	<input class="input-small" id="date_screening" type="text" placeholder="Date" name="date_screening">  
                                  	</div>
+                                 	<span class="help-block">Date should be in the format of yyyy-mm-dd</span>
                                  </div>
                                  <div class="control-group ">
                                  	<label class="control-label">Start Time*</label>
@@ -1769,6 +1873,7 @@
                                  		<input class="input-mini" id="start_time_picker" type="text" placeholder="hh:mm" name="start_time_screening">
                                  		<span class="add-on"><i class="icon-time"></i></span>
                                  	</div>
+                                 	<span class="help-block">Time should be in the format of hh:mm in 24 hours format</span>
                                  </div>
                                  <div class="control-group "> 
                                  	<label class="control-label">End Time*</label>
@@ -1776,19 +1881,20 @@
                                  		<input class="input-mini" id="end_time_picker" type="text" placeholder="hh:mm" name="end_time_screening">
                                  		<span class="add-on"><i class="icon-time"></i></span>
                                  	</div>
+                                 	<span class="help-block">Time should be in the format of hh:mm in 24 hours format</span>
                                  </div>
                                  <div class="control-group">
-                                  	<label class="control-label">Animator*</label>
+                                  	<label class="control-label">Mediator*</label>
                                   	<div class="controls"> 
                                   	<select name="animator_screening" id="id_animator_screening">
                                     <option>
-                                        Animator 1
+                                        Mediator 1
                                     </option>
                                     <option>
-                                        Animator 2
+                                        Mediator 2
                                     </option>
                                     <option>
-                                        Animator 3
+                                        Mediator 3
                                     </option>
                                 </select > 
                                 	</div>
@@ -1976,6 +2082,9 @@
                          </form>-->
                     </div>
                     <div  id="video_list">
+                    	<div id="legend">
+					      <legend class="">Videos</legend>
+					    </div>
                         <table id="video_list_table" class="table table-striped display dataTable" aria-describedby="list_table_info">
                             <thead>
                                 <tr>
@@ -1990,10 +2099,10 @@
                                         Village
                                     </th>
                                     <th>
-                                        Video production start date
+                                        Production start date
                                     </th>
                                     <th>
-                                        Video production end date
+                                        Production end date
                                     </th>
                                     <th class="sorting" role="columnheader" tabindex="0" aria-controls="person_list_table" rowspan="1" colspan="1" style="width: 23px;" aria-label=": activate to sort column ascending"></th>
                                 </tr>
@@ -4503,6 +4612,9 @@
                         </table>
                     </div>
                     <div  id="mediator_list">
+                    	<div id="legend">
+					      <legend class="">Mediators</legend>
+					    </div>
                         <table id="mediator_list_table" class="table table-striped display dataTable">
                             <thead>
                                 <tr>
@@ -4556,7 +4668,7 @@
                                         PRAGATI
                                     </td>
                                     <td>
-                                        Gunthaguda(C)
+                                        Gunthaguda(C), CGPalli, Lingaguda
                                     </td>
                                     <td class="">
                                         <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
@@ -4575,7 +4687,7 @@
                                         PRAGATI
                                     </td>
                                     <td>
-                                        CHILAM
+                                        CHILAM, Lingaguda
                                     </td>
                                     <td class="">
                                         <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
@@ -6428,6 +6540,9 @@
                         </table>
                     </div>
                     <div  id="person_list">
+                    	<div id="legend">
+					      <legend class="">Persons</legend>
+					    </div>
                         <table id="person_list_table" class="table table-striped display dataTable" aria-describedby="list_table_info">
                             <thead>
                                 <tr role="row">
@@ -10454,6 +10569,9 @@
                         </table>
                     </div>
                     <div  id="group_list">
+                    	<div id="legend">
+					      <legend class="">Groups</legend>
+					    </div>
                         <table id="group_list_table" class="table table-striped display dataTable">
                             <thead>
                                 <tr>
@@ -12076,9 +12194,15 @@
                         </table>
                     </div>
                     <div  id="screening_list">
+                    <div id="legend">
+					      <legend class="">Screenings</legend>
+					    </div>
                     <table id="screening_list_table" class="table table-striped display dataTable"> <thead> <tr> <th> Id </th> <th> Date </th> <th> Village </th> <th> Groups </th> <th> Videos Screened </th> <th class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </th> </tr> </thead> <tbody> <tr class="row2"> <td> 10000000125648 </td> <th id="row0"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125648/"></a><a href="#dashboard/screening/10000000125648/">2013-01-21</a> </div> </th> <td> PETAL </td> <td> DAMBARU KINIBAR'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125642 </td> <th id="row1"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125642/"></a><a href="#dashboard/screening/10000000125642/">2013-01-19</a> </div> </th> <td> Danduguda </td> <td> BHIMA KHILLO SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125638 </td> <th id="row2"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125638/"></a><a href="#dashboard/screening/10000000125638/">2013-01-18</a> </div> </th> <td> MULDA </td> <td> KAMALA KHILLO'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125635 </td> <th id="row3"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125635/"></a><a href="#dashboard/screening/10000000125635/">2013-01-22</a> </div> </th> <td> MULDA </td> <td> MADHU ANCHAL'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125633 </td> <th id="row4"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125633/"></a><a href="#dashboard/screening/10000000125633/">2013-01-17</a> </div> </th> <td> RAISING </td> <td> KUJI MUDULI'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125631 </td> <th id="row5"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125631/"></a><a href="#dashboard/screening/10000000125631/">2013-01-16</a> </div> </th> <td> RAISING </td> <td> SAMARA MUDULI'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125628 </td> <th id="row6"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125628/"></a><a href="#dashboard/screening/10000000125628/">2013-01-14</a> </div> </th> <td> KAKADA </td> <td> LACHAMAN MAJHI'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125626 </td> <th id="row7"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125626/"></a><a href="#dashboard/screening/10000000125626/">2013-01-15</a> </div> </th> <td> KAKADA </td> <td> DAMANI GATAN'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125625 </td> <th id="row8"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125625/"></a><a href="#dashboard/screening/10000000125625/">2013-01-12</a> </div> </th> <td> DEBSANGUDA </td> <td> SADHU KHORA'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125624 </td> <th id="row9"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125624/"></a><a href="#dashboard/screening/10000000125624/">2013-01-11</a> </div> </th> <td> CHILIPUT </td> <td> BALARAM BADANAYK' SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125622 </td> <th id="row10"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125622/"></a><a href="#dashboard/screening/10000000125622/">2013-01-11</a> </div> </th> <td> CHILIPUT </td> <td> ANANTARAM SISA'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125620 </td> <th id="row11"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125620/"></a><a href="#dashboard/screening/10000000125620/">2013-01-09</a> </div> </th> <td> KATARBA </td> <td> GURU MUDULI'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125619 </td> <th id="row12"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125619/"></a><a href="#dashboard/screening/10000000125619/">2013-01-10</a> </div> </th> <td> KATARBA </td> <td> BALARAM PANGI'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125618 </td> <th id="row13"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125618/"></a><a href="#dashboard/screening/10000000125618/">2013-01-29</a> </div> </th> <td> KATARBA </td> <td> SHYAM KHILLO'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125617 </td> <th id="row14"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125617/"></a><a href="#dashboard/screening/10000000125617/">2013-01-26</a> </div> </th> <td> MANGREL </td> <td> DAMU PUJAR'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125616 </td> <th id="row15"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125616/"></a><a href="#dashboard/screening/10000000125616/">2013-01-07</a> </div> </th> <td> MANGREL </td> <td> SANU PUJARI </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125613 </td> <th id="row16"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125613/"></a><a href="#dashboard/screening/10000000125613/">2013-01-08</a> </div> </th> <td> MANGREL </td> <td> BALU SISA'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125612 </td> <th id="row17"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125612/"></a><a href="#dashboard/screening/10000000125612/">2013-01-08</a> </div> </th> <td> MANGREL </td> <td> JAYA KHEMUNDU'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125611 </td> <th id="row18"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125611/"></a><a href="#dashboard/screening/10000000125611/">2013-01-05</a> </div> </th> <td> KARANJAGUDA </td> <td> RABI KHADA'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000125610 </td> <th id="row19"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125610/"></a><a href="#dashboard/screening/10000000125610/">2013-01-05</a> </div> </th> <td> KARANJAGUDA </td> <td> DALIMA KHORA'S SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000125609 </td> <th id="row20"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000125609/"></a><a href="#dashboard/screening/10000000125609/">2013-01-28</a> </div> </th> <td> KARANJAGUDA </td> <td> DALIMA KHORA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123602 </td> <th id="row21"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123602/"></a><a href="#dashboard/screening/10000000123602/">2012-12-27</a> </div> </th> <td> DABAPUT </td> <td> JAMUNA KRISANI SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123054 </td> <th id="row22"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123054/"></a><a href="#dashboard/screening/10000000123054/">2012-12-06</a> </div> </th> <td> MANDIPADAR(CHATWA) </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123053 </td> <th id="row23"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123053/"></a><a href="#dashboard/screening/10000000123053/">2012-12-08</a> </div> </th> <td> Dongri </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123052 </td> <th id="row24"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123052/"></a><a href="#dashboard/screening/10000000123052/">2012-12-06</a> </div> </th> <td> SAN CHINDRI </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123051 </td> <th id="row25"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123051/"></a><a href="#dashboard/screening/10000000123051/">2012-12-01</a> </div> </th> <td> SAN CHINDRI </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123049 </td> <th id="row26"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123049/"></a><a href="#dashboard/screening/10000000123049/">2012-12-06</a> </div> </th> <td> Dongari Maliguda </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123046 </td> <th id="row27"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123046/"></a><a href="#dashboard/screening/10000000123046/">2012-12-15</a> </div> </th> <td> Musriaguda </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123045 </td> <th id="row28"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123045/"></a><a href="#dashboard/screening/10000000123045/">2012-12-18</a> </div> </th> <td> Hirdiput </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123044 </td> <th id="row29"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123044/"></a><a href="#dashboard/screening/10000000123044/">2012-12-08</a> </div> </th> <td> Ghodadora </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123043 </td> <th id="row30"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123043/"></a><a href="#dashboard/screening/10000000123043/">2012-12-15</a> </div> </th> <td> Ghodadora </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123042 </td> <th id="row31"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123042/"></a><a href="#dashboard/screening/10000000123042/">2012-12-28</a> </div> </th> <td> Basuput </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123041 </td> <th id="row32"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123041/"></a><a href="#dashboard/screening/10000000123041/">2012-12-13</a> </div> </th> <td> Basuput </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123040 </td> <th id="row33"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123040/"></a><a href="#dashboard/screening/10000000123040/">2012-12-06</a> </div> </th> <td> Nariaguda </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123038 </td> <th id="row34"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123038/"></a><a href="#dashboard/screening/10000000123038/">2012-12-30</a> </div> </th> <td> Nariaguda </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123037 </td> <th id="row35"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123037/"></a><a href="#dashboard/screening/10000000123037/">2012-12-28</a> </div> </th> <td> Khariguda </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123036 </td> <th id="row36"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123036/"></a><a href="#dashboard/screening/10000000123036/">2012-12-21</a> </div> </th> <td> Khariguda </td> <td> SADAR MANDAP </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123034 </td> <th id="row37"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123034/"></a><a href="#dashboard/screening/10000000123034/">2012-12-26</a> </div> </th> <td> Dayanidhiguda </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123033 </td> <th id="row38"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123033/"></a><a href="#dashboard/screening/10000000123033/">2012-12-06</a> </div> </th> <td> Desnaikguda </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000123032 </td> <th id="row39"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123032/"></a><a href="#dashboard/screening/10000000123032/">2012-12-12</a> </div> </th> <td> Desnaikguda </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000123030 </td> <th id="row40"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000123030/"></a><a href="#dashboard/screening/10000000123030/">2012-12-07</a> </div> </th> <td> Girliput </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122950 </td> <th id="row41"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122950/"></a><a href="#dashboard/screening/10000000122950/">2012-12-06</a> </div> </th> <td> Khariguda </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122949 </td> <th id="row42"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122949/"></a><a href="#dashboard/screening/10000000122949/">2012-12-12</a> </div> </th> <td> Khariguda </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122948 </td> <th id="row43"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122948/"></a><a href="#dashboard/screening/10000000122948/">2012-12-20</a> </div> </th> <td> Ghodadora </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122947 </td> <th id="row44"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122947/"></a><a href="#dashboard/screening/10000000122947/">2012-11-30</a> </div> </th> <td> Ghodadora </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122945 </td> <th id="row45"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122945/"></a><a href="#dashboard/screening/10000000122945/">2012-12-06</a> </div> </th> <td> Chatiguda </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122943 </td> <th id="row46"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122943/"></a><a href="#dashboard/screening/10000000122943/">2012-12-11</a> </div> </th> <td> DUMURIBARI(HATIBARI) </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122936 </td> <th id="row47"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122936/"></a><a href="#dashboard/screening/10000000122936/">2012-12-15</a> </div> </th> <td> LULU BURU </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122934 </td> <th id="row48"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122934/"></a><a href="#dashboard/screening/10000000122934/">2012-12-06</a> </div> </th> <td> BAILGUDA(GOLLURU) </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122932 </td> <th id="row49"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122932/"></a><a href="#dashboard/screening/10000000122932/">2012-12-20</a> </div> </th> <td> EMLAGUDA </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122931 </td> <th id="row50"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122931/"></a><a href="#dashboard/screening/10000000122931/">2012-12-18</a> </div> </th> <td> ASHRAMPUT </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122930 </td> <th id="row51"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122930/"></a><a href="#dashboard/screening/10000000122930/">2012-12-01</a> </div> </th> <td> NANDIGUDA </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122928 </td> <th id="row52"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122928/"></a><a href="#dashboard/screening/10000000122928/">2012-12-04</a> </div> </th> <td> BADAHANJAR </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122927 </td> <th id="row53"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122927/"></a><a href="#dashboard/screening/10000000122927/">2012-12-11</a> </div> </th> <td> ATUBU </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122926 </td> <th id="row54"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122926/"></a><a href="#dashboard/screening/10000000122926/">2012-12-18</a> </div> </th> <td> MALISUBLAR </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122922 </td> <th id="row55"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122922/"></a><a href="#dashboard/screening/10000000122922/">2012-12-13</a> </div> </th> <td> BADIGAPUT </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122921 </td> <th id="row56"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122921/"></a><a href="#dashboard/screening/10000000122921/">2012-12-05</a> </div> </th> <td> DHARASUBLAR </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122916 </td> <th id="row57"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122916/"></a><a href="#dashboard/screening/10000000122916/">2012-12-04</a> </div> </th> <td> KULABIR </td> <td> TRINATH </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122915 </td> <th id="row58"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122915/"></a><a href="#dashboard/screening/10000000122915/">2012-12-17</a> </div> </th> <td> ARLABPUT </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122914 </td> <th id="row59"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122914/"></a><a href="#dashboard/screening/10000000122914/">2012-12-10</a> </div> </th> <td> MADAIGUDA(BALDA) </td> <td> BIMALA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122913 </td> <th id="row60"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122913/"></a><a href="#dashboard/screening/10000000122913/">2012-12-03</a> </div> </th> <td> KATIYAPUT(BALDA) </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122911 </td> <th id="row61"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122911/"></a><a href="#dashboard/screening/10000000122911/">2012-12-01</a> </div> </th> <td> KUBAPUT(BALDA) </td> <td> RUKMANI </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122909 </td> <th id="row62"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122909/"></a><a href="#dashboard/screening/10000000122909/">2012-12-08</a> </div> </th> <td> SAPUT </td> <td> CHAITAN </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122908 </td> <th id="row63"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122908/"></a><a href="#dashboard/screening/10000000122908/">2012-12-07</a> </div> </th> <td> PARAJA AMBEL </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122906 </td> <th id="row64"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122906/"></a><a href="#dashboard/screening/10000000122906/">2012-12-13</a> </div> </th> <td> TAINTAR(BHEJA) </td> <td> HOSUE </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122904 </td> <th id="row65"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122904/"></a><a href="#dashboard/screening/10000000122904/">2012-12-21</a> </div> </th> <td> UPPER KONDAPALLI </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122901 </td> <th id="row66"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122901/"></a><a href="#dashboard/screening/10000000122901/">2012-12-18</a> </div> </th> <td> TALAKONDAPALI </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122899 </td> <th id="row67"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122899/"></a><a href="#dashboard/screening/10000000122899/">2012-12-17</a> </div> </th> <td> CHEPETA META </td> <td> BANDHU </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122895 </td> <th id="row68"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122895/"></a><a href="#dashboard/screening/10000000122895/">2012-12-05</a> </div> </th> <td> MOJAGUDA </td> <td> BIMALA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122894 </td> <th id="row69"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122894/"></a><a href="#dashboard/screening/10000000122894/">2012-12-27</a> </div> </th> <td> TODING </td> <td> CHAMPA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122892 </td> <th id="row70"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122892/"></a><a href="#dashboard/screening/10000000122892/">2012-12-15</a> </div> </th> <td> POGRA </td> <td> BIMALA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122878 </td> <th id="row71"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122878/"></a><a href="#dashboard/screening/10000000122878/">2012-12-02</a> </div> </th> <td> SARIAPUT </td> <td></td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122874 </td> <th id="row72"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122874/"></a><a href="#dashboard/screening/10000000122874/">2012-12-14</a> </div> </th> <td> KHUDUB </td> <td> GURU BURUDI </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122872 </td> <th id="row73"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122872/"></a><a href="#dashboard/screening/10000000122872/">2012-12-12</a> </div> </th> <td> GADIAGUMMA </td> <td> BIMALA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122864 </td> <th id="row74"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122864/"></a><a href="#dashboard/screening/10000000122864/">2012-12-06</a> </div> </th> <td> KHUDA </td> <td> DEBAKI </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122789 </td> <th id="row75"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122789/"></a><a href="#dashboard/screening/10000000122789/">2012-12-06</a> </div> </th> <td> MALI AMBEL </td> <td> MALIKA PUJARI </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122781 </td> <th id="row76"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122781/"></a><a href="#dashboard/screening/10000000122781/">2012-12-29</a> </div> </th> <td> HIKIMPUT </td> <td> CHANDRAMA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122779 </td> <th id="row77"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122779/"></a><a href="#dashboard/screening/10000000122779/">2012-12-25</a> </div> </th> <td> BADLIGUDA(Hikimput) </td> <td> MADHU </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122775 </td> <th id="row78"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122775/"></a><a href="#dashboard/screening/10000000122775/">2012-12-28</a> </div> </th> <td> KHILUA </td> <td> DASARATHA BADNAIK </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122588 </td> <th id="row79"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122588/"></a><a href="#dashboard/screening/10000000122588/">2012-12-21</a> </div> </th> <td> LUNJINGI </td> <td> SAITA SISA </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122585 </td> <th id="row80"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122585/"></a><a href="#dashboard/screening/10000000122585/">2012-12-26</a> </div> </th> <td> KHILUA </td> <td> RAGHU </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122582 </td> <th id="row81"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122582/"></a><a href="#dashboard/screening/10000000122582/">2012-12-28</a> </div> </th> <td> TAMDING </td> <td> SAMARA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122577 </td> <th id="row82"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122577/"></a><a href="#dashboard/screening/10000000122577/">2012-12-17</a> </div> </th> <td> CHUAPHUL </td> <td> KOMTI SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122575 </td> <th id="row83"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122575/"></a><a href="#dashboard/screening/10000000122575/">2012-12-27</a> </div> </th> <td> CHUAPHUL </td> <td> KAMLI </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122573 </td> <th id="row84"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122573/"></a><a href="#dashboard/screening/10000000122573/">2012-12-01</a> </div> </th> <td> GOLLURU </td> <td> SIMADRI SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122572 </td> <th id="row85"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122572/"></a><a href="#dashboard/screening/10000000122572/">2012-12-01</a> </div> </th> <td> GOLLURU </td> <td> LINGAMA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122569 </td> <th id="row86"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122569/"></a><a href="#dashboard/screening/10000000122569/">2012-12-06</a> </div> </th> <td> GOLLURU </td> <td> PANTHULU SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122564 </td> <th id="row87"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122564/"></a><a href="#dashboard/screening/10000000122564/">2012-12-17</a> </div> </th> <td> GOLLURU </td> <td> POTHI SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122563 </td> <th id="row88"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122563/"></a><a href="#dashboard/screening/10000000122563/">2012-12-13</a> </div> </th> <td> GOLLURU </td> <td> JAMUNA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122561 </td> <th id="row89"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122561/"></a><a href="#dashboard/screening/10000000122561/">2012-12-25</a> </div> </th> <td> GOLLURU </td> <td> DOSUDA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122559 </td> <th id="row90"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122559/"></a><a href="#dashboard/screening/10000000122559/">2012-12-06</a> </div> </th> <td> GOLLURU </td> <td> SUBALAMBA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122556 </td> <th id="row91"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122556/"></a><a href="#dashboard/screening/10000000122556/">2012-12-04</a> </div> </th> <td> DUMURIGUDA </td> <td> RAJU SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122544 </td> <th id="row92"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122544/"></a><a href="#dashboard/screening/10000000122544/">2012-12-03</a> </div> </th> <td> MALIPUT(GOLLURU) </td> <td> BUTU SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122538 </td> <th id="row93"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122538/"></a><a href="#dashboard/screening/10000000122538/">2012-12-08</a> </div> </th> <td> PETAL </td> <td> JAYA KINBAR SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122527 </td> <th id="row94"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122527/"></a><a href="#dashboard/screening/10000000122527/">2012-12-08</a> </div> </th> <td> PETAL </td> <td> J.B.I.C. SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122514 </td> <th id="row95"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122514/"></a><a href="#dashboard/screening/10000000122514/">2012-12-07</a> </div> </th> <td> MULDA </td> <td> MATI ANCHAL SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122506 </td> <th id="row96"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122506/"></a><a href="#dashboard/screening/10000000122506/">2012-12-07</a> </div> </th> <td> MULDA </td> <td> MANGALA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122499 </td> <th id="row97"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122499/"></a><a href="#dashboard/screening/10000000122499/">2012-12-13</a> </div> </th> <td> GOLLURU </td> <td> SIMANA SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row2"> <td> 10000000122494 </td> <th id="row98"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122494/"></a><a href="#dashboard/screening/10000000122494/">2012-12-15</a> </div> </th> <td> TAMDING </td> <td> LAKIRAM SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> <tr class="row1"> <td> 10000000122489 </td> <th id="row99"> <div class="gwt-Hyperlink"> <a href="#dashboard/screening/10000000122489/"></a><a href="#dashboard/screening/10000000122489/">2012-12-15</a> </div> </th> <td> TAMDING </td> <td> BIREI SHG </td> <td>SRI tehnique, coco weeding</td><td class=""> <a href="#" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a> </td> </tr> </tbody> </table>
                      </div>
                     <div  id="adoption_list">
+                    	<div id="legend">
+					      <legend class="">Adoptions</legend>
+					    </div>
                         <table id="adoption_list_table" class="table table-striped display dataTable">
                             <thead>
                                 <tr>

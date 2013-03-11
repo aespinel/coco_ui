@@ -12,12 +12,21 @@
          $('#video_production_start_date').datepicker({
 				format: 'yyyy-mm-dd'
 			});
+         $("#video_production_start_date").focusout(function () {
+        	 $('#date_screening').datepicker('hide');
+        	});
          $('#video_production_end_date').datepicker({
 				format: 'yyyy-mm-dd'
 			});
+         $("#video_production_end_date").focusout(function () {
+        	 $('#date_screening').datepicker('hide');
+        	});
          $('#approval_date').datepicker({
 				format: 'yyyy-mm-dd'
 			});
+         $("#approval_date").focusout(function () {
+        	 $('#date_screening').datepicker('hide');
+        	});
          $('#date_screening').datepicker({
 				format: 'yyyy-mm-dd'
 			});
@@ -221,8 +230,49 @@
         	  });
          
          //for group page inline validation
+        
+         $.fn.serializeObject = function()
+         {
+             var o = {};
+             var a = this.serializeArray();
+             $.each(a, function() {
+                 if (o[this.name] !== undefined) {
+                     if (!o[this.name].push) {
+                         o[this.name] = [o[this.name]];
+                     }
+                     o[this.name].push(this.value || '');
+                 } else {
+                     o[this.name] = this.value || '';
+                 }
+             });
+             return o;
+         };
+
          
 		$("#video_form").validate({
+			submitHandler: function(form) {
+			     console.log($(form));
+			     console.log(JSON.stringify($(form).serializeObject()));
+			     $(form).submit(function () {
+			    	 $.ajax({
+					        type: "POST",
+					        url: 'http://127.0.0.1:8000/api/v1/video/',
+					        contentType:'application/json',
+			  				dataType: 'application/json',
+					        async: true,
+					        //json object to sent to the authentication url
+					        data: JSON.stringify($('form').serializeObject()),
+					        success: function () {	
+					        	alert("Thanks!"); 
+					        },
+					        error: function (xhr, ajaxOptions, thrownError) {
+			        			alert(xhr.status);
+			        			console.log(xhr);
+			        			alert(thrownError);
+					        }
+					 });			    	 
+			     });
+			   },
 				rules: {
 					title: {
 						required: true,
