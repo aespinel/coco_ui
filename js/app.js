@@ -8,6 +8,8 @@
          $.validator.addMethod('validateTime',
              validateTime, 'Enter the time in the format of hh:mm in 24 hours format'
            );
+         
+         $(".chzn-select").chosen();
          //Date fields init
          $('#video_production_start_date').datepicker({
 				format: 'yyyy-mm-dd'
@@ -35,14 +37,14 @@
         	});
          //time fields init
          $('#start_time_picker').timepicker({
-             minuteStep: 1,
-             defaultTime: false,
-             showMeridian: false
+             //minuteStep: 1,
+             //defaultTime: false,
+             //showMeridian: false
          });
          $('#end_time_picker').timepicker({
-        	 minuteStep: 1,
-        	 defaultTime: false,
-             showMeridian: false
+        	 //minuteStep: 1,
+        	 //defaultTime: false,
+             //showMeridian: false
          });
          //data table init
          $('#person_list_table').dataTable({"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"});
@@ -83,6 +85,9 @@
      	    	person_options += '<option value="' + parseInt(animator_select_json.persons[i].id) + '">' + animator_select_json.persons[i].name + '</option>';
           	  }
      	      $("#id_person_screening").html(person_options);
+			  
+			  $("#id_person_screening").trigger("liszt:updated");
+			  $("#id_group_screening").trigger("liszt:updated");
          });
          
          $("#id_village_adoption").change(function() {
@@ -100,11 +105,14 @@
      	    	person_options += '<option value="' + parseInt(animator_select_json.persons[i].id) + '">' + animator_select_json.persons[i].name + '</option>';
           	  }
      	      $("#id_person_adoption").html(person_options);
+			  $("#id_person_adoption").trigger("liszt:updated");
+			  $("#id_group_adoption").trigger("liszt:updated");
          });
          
-         $('#id_group_adoption').click(function(){
-        	 group_name = $('#id_group_adoption option:selected').html();
-        	 if(group_name) {
+         $('#id_group_adoption').chosen().change(function(){
+        	 //group_name = $('#id_group_adoption option:selected').html();
+			 $('#pav_table').find('tbody').html("");
+        	 $('#id_group_adoption option:selected').each(function() {
 	        	 $('#id_group_adoption option:selected').appendTo('#id_group_adoption_right');
 	        	 var persons_details = {"persons_in_group": 
 	         		   [{"name": "Bhallapur", "id": 10000000000337, "videos_seen":[{"title": "SRI", "id":10000000000337}]}, 
@@ -129,13 +137,14 @@
 	             	}
 	         	   update_pav_table();
 	         	   add_pav_remove_handler();
-        	 }
+        	 });
         	});
          
-         $('#id_group_screening').click(function(){
-        	 group_name = $('#id_group_screening option:selected').html();
-        	 if(group_name) {
-	        	 $('#id_group_screening option:selected').appendTo('#id_group_screening_right');
+         $('#id_group_screening').chosen().change(function(){
+        	 //group_name = $('#id_group_screening option:selected').html();
+			 $('#pma_table').find('tbody').html("");
+        	 $('#id_group_screening option:selected').each(function() {
+	        	 //$('#id_group_screening option:selected').appendTo('#id_group_screening_right');
 	        	 var persons_details = {"persons_in_group": 
 	         		   [{"name": "Bhallapur", "id": 10000000000337, "videos_seen":[{"title": "SRI", "id":10000000000337}]}, 
 	         	       {"name": "Dhanurjayapuram", "id": 10000000000336, "videos_seen":[{"title": "SRI", "id":10000000000337}]},
@@ -149,14 +158,19 @@
 	         	   for (var i = 0; i < persons_details.persons_in_group.length; i++) {
 	        	    	 //console.log(animator_select_json.villages[i].id);
 	         		  // pma_table += '<option value="' + parseInt(animator_select_json.persons[i].id) + '">' + animator_select_json.persons[i].name + '</option>';
-	         		   $('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+persons_details.persons_in_group[i].name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td > <div class="control-group"><div class="controls"><input name="question_asked_'+persons_details.persons_in_group[i].id+'" type="text" maxlength="500"> </div></div></td> <td> <input type="checkbox"> </td> </tr>');
+	         		   $('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '
+	         				   +persons_details.persons_in_group[i].name+
+	         				   ' </td>  <td> <input type="checkbox"> </td> <td><i class="icon-question-sign expressed_question">'+
+	         				   '</i></td><td><i class="icon-facetime-video expressed_adoption"></i></td></tr>');
 	             	}
 	         	   update_table();
 	         	   add_remove_handler();
-        	 }
+	         	   add_expressed_adoption_handler();
+	         	   add_expressed_question_handler();
+        	 });
         	});
          
-         $('#id_person_adoption').click(function(){
+         $('#id_person_adoption').chosen().change(function(){
              person_name = $('#id_person_adoption option:selected').html();
              person_id = $('#id_person_adoption option:selected').val();
          	   if(person_name) {
@@ -173,12 +187,12 @@
          	   }
            });
          
-         $('#id_person_screening').click(function(){
+         $('#id_person_screening').chosen().change(function(){
            person_name = $('#id_person_screening option:selected').html();
            person_id = $('#id_person_screening option:selected').val();
        	   if(person_name) {
-	       		$('#id_person_screening option:selected').appendTo('#id_person_screening_right');
-	        	$('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+person_name+' </td> <td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td> <td><div class="control-group"><div class="controls"> <input name="question_asked_'+person_id+'" type="text" maxlength="500"> </div></div></td> <td> <input type="checkbox"> </td> </tr>');
+	       		//$('#id_person_screening option:selected').appendTo('#id_person_screening_right');
+	        	$('#pma_table').find('tbody:last').append('<tr> <td><i class="icon-remove remove"></i></td> <td>  </td> <td> '+person_name+' </td> <td> <input type="checkbox"> </td><td><div class="control-group"><div class="controls"> <input name="question_asked_'+person_id+'" type="text" maxlength="500"> </div></div></td><td> <select> <option> PREPARATION OF ORGANIC UREA </option> </select> </td>   </tr>');
 	       		update_table();
 	       		add_remove_handler();
        	   }
@@ -188,10 +202,69 @@
         	    $('#id_group_screening_right option:selected').appendTo('#id_group_screening');
         	});*/
         	
-        function add_remove_handler() {
+        $("#screening_reset").click(function() {
+		    //console.log(obj);
+			$("#screening_form").find(':input').each(function() {
+				switch(this.type) {
+					case 'password':
+					case 'select-multiple':
+					case 'select-one':
+					case 'text':
+					case 'textarea':
+						$(this).val('');
+						break;
+					case 'checkbox':
+					case 'radio':
+						this.checked = false;
+				}
+			});
+			$('#screening_form')[0].reset();
+			$('#pma_table').find('tbody').html("");
+		});
+		
+		$("#adoption_reset").click(function() {
+		    //console.log(obj);
+			$("#adoption_form").find(':input').each(function() {
+				switch(this.type) {
+					case 'password':
+					case 'select-multiple':
+					case 'select-one':
+					case 'text':
+					case 'textarea':
+						$(this).val('');
+						break;
+					case 'checkbox':
+					case 'radio':
+						this.checked = false;
+				}
+			});
+			$('#adoption_form')[0].reset();
+			$('#pav_table').find('tbody').html("");
+		});
+		
+		function add_remove_handler() {
         	$('.remove').click( function() {
                	$(this).closest('tr').remove();
                	update_table();
+             });
+        }
+        
+        function add_expressed_adoption_handler() {
+        	$('.expressed_adoption').click( function() {
+               	$(this).closest('tr').find("td:nth-child(6)").html('<select> <option> PREPARATION OF ORGANIC UREA </option> </select>');
+               	$(this).hide();
+               	//console.log($(this));
+               	//console.log($(this).html());
+             });
+        }
+        
+        function add_expressed_question_handler() {
+        	$('.expressed_question').click( function() {
+               	$(this).closest('tr').find("td:nth-child(5)").html('<div class="control-group"><div class="controls"><input '
+               			+' type="text" placeholder="Question Asked" maxlength="500"> </div></div>');
+               	$(this).hide();
+               	//console.log($(this));
+               	//console.log($(this).html());
              });
         }
         
@@ -205,9 +278,10 @@
         function update_table() {
         	var i=1;
         	$("#pma_table tbody tr").each(function (){
+        		console.log(i);
         		$(this).find("td:nth-child(2)").html(i);
         		//add validation rule for question asked
-        		$(this).find("td:nth-child(5) input").rules("add",{allowedChar: true});
+        		//$(this).find("td:nth-child(5) input").rules("add",{allowedChar: true});
         		i++;
             });
         }
@@ -229,7 +303,8 @@
         	   }
         	  });
          
-         //for group page inline validation
+         
+		 //for group page inline validation
         
          $.fn.serializeObject = function()
          {

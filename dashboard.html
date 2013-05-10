@@ -12,6 +12,7 @@
         <link href="css/coco.css" rel="stylesheet" type="text/css" />
         <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
         <link href="css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
         <link href="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.js" type="text/javascript"></script>
@@ -21,6 +22,7 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js" type="text/javascript"></script>
         <script src="js/bootstrap-timepicker.js" type="text/javascript"></script>
         <script src="js/app.js" type="text/javascript"></script>
+        <script src="js/chosen.jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 
         var content = {
@@ -61,6 +63,20 @@
             	$("#coco_content").children("div").hide();
             	$("#settings_tab").show();
             });
+			$("#videos_list").click(function(e) {
+            	$("#coco_sidebar").hide();
+				$("#coco_content").removeClass('span9');
+            	$("#coco_content").addClass('span12');
+				$("#coco_content").prepend("<div><a id='left_arrow'><img style='width:30px;' src='images.png'/></a></div>");
+				$("#left_arrow").click(function() {
+					$("#coco_content").removeClass('span12');
+					$("#coco_content").addClass('span9');
+					$('#left_arrow').remove();
+					$("#coco_sidebar").show();
+					
+				});
+            });
+			
         });
         </script>
     </head>
@@ -80,7 +96,7 @@
                 
                 <div id="coco_nav" class="pull-left">
                     <ul class="nav nav-stacked">
-                        <li><a href="#video_list">Videos</a></li>
+                        <li><a id="videos_list" href="#video_list">Videos</a></li>
                         <li><a href="#mediator_list">Mediators</a></li>
                         <li><a href="#group_list">Groups</a></li>
                         <li><a href="#person_list">Person</a></li>
@@ -320,7 +336,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Village*</label>
                                     <div class="controls">
-                                        <select name="village">
+                                        <select data-placeholder="Choose a village..." name="village" class="chzn-select">
                                         	<option value="">---------- </option><option value="10000000000337">Bhallapur</option><option value="10000000000339">Dhanurjayapuram</option>
                                         </select>
                                     </div>
@@ -328,7 +344,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Facilitator*</label>
                                     <div class="controls">
-                                        <select name="facilitator">
+                                        <select data-placeholder="Choose a faciliatator" name="facilitator" class="chzn-select">
                                             <option selected="selected" value="">
                                                 ---------
                                             </option>
@@ -563,7 +579,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Camera Operator*</label>
                                     <div class="controls">
-                                        <select name="camera_operator">
+                                        <select name="camera_operator" data-placeholder="Choose a camera operator..." class="chzn-select">
                                             <option selected="selected" value="">
                                                 ---------
                                             </option>
@@ -798,7 +814,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Persons Shown*</label>
                                     <div class="controls">
-                                        <select size="20" multiple="multiple" class="input-xlarge" name="persons_shown">
+                                        <select size="20" multiple="multiple" data-placeholder="Choose persons shown.." class="input-xlarge chzn-select" name="persons_shown">
                                             <option value="10000000055506">
                                                 SAMARA MAJHI(Taraliput)
                                             </option>
@@ -1884,57 +1900,272 @@
                                  	<span class="help-block">Time should be in the format of hh:mm in 24 hours format</span>
                                  </div>
                                  <div class="control-group">
-                                  	<label class="control-label">Mediator*</label>
+                                  	<label class="control-label">Village*</label>
                                   	<div class="controls"> 
-                                  	<select name="animator_screening" id="id_animator_screening">
+                                  	<select name="animator_screening" id="id_animator_screening" class="chzn-select">
                                     <option>
-                                        Mediator 1
+                                        village 1
                                     </option>
                                     <option>
-                                        Mediator 2
+                                        village 2
                                     </option>
                                     <option>
-                                        Mediator 3
+                                        village 3
                                     </option>
                                 </select > 
                                 	</div>
                                 </div>
                                 <div class="control-group">
-                                	<label class="control-label">Village*</label>
+                                	<label class="control-label">Mediator*</label>
                                 	<div class="controls"> 
-                                	<select name="village_screening" id="id_village_screening" placeholder="Enter animator to enable"></select>
+                                	<select name="village_screening" id="id_village_screening" placeholder="Enter village to enable"></select>
                                 	</div>
                                 </div>
                                 <div class="control-group"> 
                                 	<label class="control-label">Videos Screened*</label>
                                 	<div class="controls"> 
-                                	<select multiple="multiple" name="videos_screened_screening">
-                                    <option>
-                                        Video 1
-                                    </option>
-                                    <option>
-                                        Video 2
-                                    </option>
-                                    <option>
-                                        Video 3
-                                    </option>
+                                	<select multiple="multiple" class="chzn-select input-xlarge" name="videos_screened_screening">
+                                    <option value="10000000019287">Preparation method of pot manure Oriya Pragati Odisha (Karanguda)</option>
+									<option value="10000000020905">Preparation method of Sitamruta_Odia_PRAGATI_Odisha (Putpondi)</option>
+									<option value="10000000020656">Preparation of Agarbati (Ambuapada)</option>
+									<option value="10000000020915">Preparation of Agni Astra(Garlic and Chilli Soluction)_Odia_PRAGATI_o (Gurumaiguda)</option>
+									<option value="10000000019098">Preparation of Belastra (a locally prepared organic medicine) (Bariguda)</option>
+									<option value="10000000020541">Preparation of ber pickle (Kothaghar)</option>
+									<option value="10000000020769">Preparation of Dry paddy seedling seed bed (Dumuria)</option>
+									<option value="10000000020722">Preparation of home appliances by bamboo (Erendei)</option>
+									<option value="10000000020926">Preparation of Insecticide Solution From Jatropha ( Baigabya ) _Odia_PRAGATI_Odisha (Belguda)</option>
+									<option value="10000000020916">Preparation of Insecticide Solution From Neem and Tobacco_Odia_PRAGATI_Odisha (Gurumaiguda)</option>
+									<option value="10000000019955">PREPARATION OF JEEBAMRUTA (Lendrimaliguda)</option>
+									<option value="10000000021016">Preparation of lemon pickle Odia VARRAT Keonjhar Odisha (Tangar Pada)</option>
+									<option value="10000000019107">Preparation of Machha Kath Oriya Pragati Odisha (Rengaguda)</option>
+									<option value="10000000019139">Preparation of magic compost  (Begunakhaman)</option>
+									<option value="10000000020664">Preparation of mango pickles (Putulia)</option>
+									<option value="10000000020745">Preparation of organic compost (Musanali)</option>
+									<option value="10000000019976">PREPARATION OF ORGANIC PESTICIDE  (BADAHANJAR)</option>
+									<option value="10000000019978">PREPARATION OF ORGANIC UREA ( 	Banapadar)</option>
+									<option value="10000000020581">Preparation of pampad from rice (Tangar Pada)</option>
+									<option value="10000000020235">Preparation of panchagavya (organic manure) (Kendar)</option>
+									<option value="10000000020665">Preparation of puffed rice (Mudhi) (Tangar Pada)</option>
+									<option value="10000000020542">preparation of tomato sauce  (Erendei)</option>
+									<option value="10000000019899">Preparation of vermi compost (Badagaon)</option>
+									<option value="10000000020255">Preparation of vermicompost (PRAGATI) (SISAPUT)</option>
+									<option value="18000001106">Preparation of vermicompost in pot (PRAGATI) (ARLABPUT)</option>
+									<option value="10000000020256">PREPARATION OF VERMICOMPOST PIT (SISAPUT)</option>
+									<option value="10000000000435">Preparation of Vermiwash (Kothaghar)</option>
+									<option value="10000000020501">Preventing fruit drop in tomato cultivation (Kendar)</option>
+									<option value="10000000020613">Processing of Karanja Seed (Mondaguda)</option>
+									<option value="10000000020544">processing of paddy for making rice (Dimirimunda)</option>
+									<option value="10000000020506">Processing technique of castor seeds (Belguda)</option>
+									<option value="10000000020096">Production of Fingerlings (Saraskola)</option>
+									<option value="10000000019918">Profit assessment in sunflower. (Kothaghar)</option>
+									<option value="10000000020992">Profitable Cultivation of Country Bean (Raghubeda)</option>
+									<option value="10000000020420">Pumking Harvest  (Turbunga )</option>
+									<option value="10000000020871">Pumpkin Earthing up (Rangalbeda)</option>
+									<option value="10000000020899">pumpkin Earthing up (Rangalbeda)</option>
+									<option value="10000000020958">Pumpkin Harvest (Turbunga )</option>
+									<option value="10000000020088">Pumpkin sowing (Khuntakata)</option>
+									<option value="10000000020900">Pumpkin Sowing  (Rangalbeda)</option>
+									<option value="10000000020872">Pumpking Sowing (Rangalbeda)</option>
+									<option value="18000001063">PUNJI LINE SOWING OF PADDY (Kendar)</option>
+									<option value="10000000020267">Radish Cultivation - A story of a successful of farmer (Chikinia)</option>
+									<option value="10000000000027">Radish Nursery Bed (Jhunriposhi)</option>
+									<option value="10000000020076">Radish Planting (MALIPUT)</option>
+									<option value="18000001025">Ragi Nursery Bed Preparation (Ekdeli)</option>
+									<option value="10000000020797">Ragi Seed Bed Preparation_Odia_PRAGATI_Odisha (RAISING)</option>
+									<option value="10000000000403">Ragi seed treatment Oriya Pragati Odisha (Dalaiput)</option>
+									<option value="10000000021007">Rearing of ducks (Jodichatar)</option>
+									<option value="10000000020921">Rearing of silk worm at first stage. (Dalangapani)</option>
+									<option value="10000000020906">Rearing of silk worm for cocoon stage (Dalangapani)</option>
+									<option value="10000000020912">Rearing of silk worms (Dalangapani)</option>
+									<option value="10000000019390">Rearing technique of Banaraj poultry bird  (Putulia)</option>
+									<option value="10000000019724">Ridge Gourd sowing (Sangaon)</option>
+									<option value="10000000019898">Ridge Gourd Sowing (Sangaon)</option>
+									<option value="10000000020591">Ring method of Maize planting (Kothaghar)</option>
+									<option value="10000000020723">Ripening of mango by application of copper carbide Odia VARRAT Odisha (Putulia)</option>
+									<option value="10000000020721">Ripening of mango by country method Odia VARRAT Odisha (Putulia)</option>
+									<option value="10000000020483">Rose planting  (Palasapokhari)</option>
+									<option value="10000000000376">Second crop of brinjal with Organic feat Oriya Pragati Odisha (Putpondi)</option>
+									<option value="10000000020148">Seed Bed Preparation for Brinjal Crop (Rohiniduma)</option>
+									<option value="10000000019282">Seed bed preparation in Cauliflower (Dongari Maliguda)</option>
+									<option value="10000000019286">Seed bed preparation in Turnip Oriya Pragati Odisha (Dongari Maliguda)</option>
+									<option value="10000000019885">Seed extraction from tamarind odia PRAGATI Odisha (Mohadeiput(C))</option>
+									<option value="10000000020238">Seed selection and sowing in niger cultivation (Kendar)</option>
+									<option value="10000000020512">Seed sowing in bottle gourd cultivation (Mondaguda)</option>
+									<option value="10000000019701">Seed sowing technique of Cucumber Oriya Pragati Odisha (Bilaput(C))</option>
+									<option value="10000000019374">Seed treatment in mustard cultivation Ho PRADAN Odisha (Khaparkhai )</option>
+									<option value="10000000019950">Seed treatment in Paddy. (Putulia)</option>
+									<option value="18000001007">SEED TREATMENT OF ARHAR IN ORGANIC METHOD (Kendar)</option>
+									<option value="10000000020560">Seed treatment of maize in organic method Odia PRAGATI Odisha (Dalaiput)</option>
+									<option value="10000000000515">Seedling production in cabbage cultivation (Mushakhori)</option>
+									<option value="10000000020178">Seedling production in chilli cultivation (Manoharpur)</option>
+									<option value="10000000019544">Seedling raising method of Sugarcane Oriya Pragati Odisha (Gunthaguda(C))</option>
+									<option value="10000000020913">Selection of Good  Fertilizer  (Jamkhanjari)</option>
+									<option value="10000000020914">Selection of Good Verity of Seed (Khaparkhai )</option>
+									<option value="10000000019994">SHG formation and function (Erendei)</option>
+									<option value="10000000000282">SHG Meeting (Kadadhia)</option>
+									<option value="10000000019325">Showing of Gram seed Oriya Pragati Odisha (Lalguda)</option>
+									<option value="10000000021057">software engineer ( 	Banapadar)</option>
+									<option value="10000000019993">Soil sample collection for testing (Musanali)</option>
+									<option value="18000001003">Soil Sampling Procedure_Odia_PRAGATI_Odisha (Lendrimaliguda)</option>
+									<option value="10000000019270">Sowing and planting technique in potato cultivation (Kalighai)</option>
+									<option value="10000000020462">Sowing in bottle gourd cultivation (Mushakhori)</option>
+									<option value="10000000019358">Sowing in cow pea cultivation (Pragati) (Bariguda)</option>
+									<option value="10000000020504">Sowing in cucumber cultivation (Mondaguda)</option>
+									<option value="10000000020453">Sowing in green pea cultivation (Badajamuposi)</option>
+									<option value="10000000020275">Sowing in pumpkin cultivation (Dumuria)</option>
+									<option value="10000000019331">Sowing in radish cultivation (Banamahuladiha)</option>
+									<option value="10000000019702">Sowing method of Lady's finger Oriya Pragati Odisha (Bilaput(C))</option>
+									<option value="10000000020763">Sowing of Dhanicha seeds in the field (Putulia)</option>
+									<option value="10000000020955">Sowing of firki spinach (Dhobapitana)</option>
+									<option value="10000000020089">Sowing of pumpkin seeds (Khuntakata)</option>
+									<option value="10000000020239">Sowing of seeds in cow pea cultivation  (Mondaguda)</option>
+									<option value="10000000020764">Sowing of Sesamum (Putulia)</option>
+									<option value="10000000019391">Sowing technique in bitter gourd cultiavtion (Badajamuposi)</option>
+									<option value="10000000019516">Sowing technique in sunflower cultivation (Kothaghar)</option>
+									<option value="10000000019359">Sowing technique in wheat cultivation (Talapada)</option>
+									<option value="10000000020274">Sowing technique of bean cultivation (Mushakhori)</option>
+									<option value="10000000019671">Sowing technique of Cucumber (Kothaghar)</option>
+									<option value="10000000019722">Sowing technique of Multi cut Amaranthus (Sadhupada)</option>
+									<option value="10000000020354">Sowing technique of palak (spinach) (Sadhupada)</option>
+									<option value="10000000019641">Sowing technique of Ridge gourd (Badajamuposi)</option>
+									<option value="10000000020576">Spraying of growth promoter (Hormone) in bottle gourd. (Purunia)</option>
+									<option value="10000000020347">Sprouting of planting materials in potato cultivation (Rohiniduma)</option>
+									<option value="10000000000246">SRI Marker Use_Karanjia_Santhali (Rangalbeda)</option>
+									<option value="10000000000238">SRI Nursery Bed (Ektali)</option>
+									<option value="7000001303">SRI Nursery Bed Preperation (Dumbisahi)</option>
+									<option value="10000000000357">SRI practices_Koraput (PARJA VIMDOL)</option>
+									<option value="10000000019842">Staking in bitter gourd (Deuli)</option>
+									<option value="10000000020044">Staking in Cow Pea (Dimirimunda)</option>
+									<option value="10000000020050">Staking in cucumber (Dimirimunda)</option>
+									<option value="10000000020803">Staking in Kankada_Odia_PRAGATI_Odisha (Hanjar Phento(c))</option>
+									<option value="10000000020855">Staking in Kunduru_Odia_PRAGATI_Odisha (Hanjar Phento(c))</option>
+									<option value="10000000020648">Staking In Pointed Gourd(Parwal,Potal)_Odia_PRAGATI_Odisha (BORIGUMMA)</option>
+									<option value="10000000020969">Staking in semi cultivation Odia PRAGATI Odisha (Gunthaguda(C))</option>
+									<option value="10000000020858">Staking in Tomato Crop _Odia_PRAGATI_Odisha (Mondaguda)</option>
+									<option value="10000000019843">Staking provided to Little gourd (Maidankela)</option>
+									<option value="10000000020280">Stem borer control in brinjal (Dhobapitana)</option>
+									<option value="10000000019729">Stem borer control in summer paddy. (Kothaghar)</option>
+									<option value="10000000020699">Stone bonding to check run off  (GAYALPUT(BADEL))</option>
+									<option value="10000000020500">Storage of colocassia tubers for seed purpose (Putulia)</option>
+									<option value="10000000020792">Storage of onion Odia PRAGATI Odisha (Basuput)</option>
+									<option value="10000000020481">Storage of turmeric rhizome  (Dumuria)</option>
+									<option value="10000000019584">Storage technique of ginger after harvesting  (Kumulabahali)</option>
+									<option value="10000000020461">Storage techniques of paddy seeds (Kothaghar)</option>
+									<option value="10000000020402">Story of a successful farmer: sugarcane cultivation (Mohadeiput(C))</option>
+									<option value="10000000020589">Success story of Bottle gourd   (Purunia)</option>
+									<option value="10000000020982">Success story of cauliflower cultivation (Erendei)</option>
+									<option value="10000000020990">Success story of cauliflower cultivation Odia PRAGATI Odisha (MALIPUT)</option>
+									<option value="10000000020609">Success story of chilli  (Kothaghar)</option>
+									<option value="10000000021008">Success story of colour fish. (Jodichatar)</option>
+									<option value="10000000020126">Success story of cucumber (Sanagambharia)</option>
+									<option value="10000000020934">Success story of Ginger and mixed cropping Odia PRAGATI Odisha (Kumaput)</option>
+									<option value="10000000020981">Success story of ginger cultivation (Kumulabahali)</option>
+									<option value="10000000020744">Success story of Line sowing Paddy (Talapada)</option>
+									<option value="10000000020966">Success Story of Mixed Crops Odia PRAGATI Odisha (Mondaguda)</option>
+									<option value="10000000020720">Success Story of Multicut Amranthus (Sadhupada)</option>
+									<option value="10000000020666">Success story of spinach (poi) (Kuaposi)</option>
+									<option value="10000000020976">Success story of sweet potato cultivation. (Jharbeda)</option>
+									<option value="10000000020991">Success Story of Tasar (Chhatia)</option>
+									<option value="10000000020968">Success story on SRI Odia PRAGATI Odisha (Belguda)</option>
+									<option value="10000000020655">Success story over onion crop  (Dhudurupal)</option>
+									<option value="10000000020069">Sucess story of Cow Pea (Denuan)</option>
+									<option value="10000000021028">Sucess story of Duck rearing (Jodichatar)</option>
+									<option value="10000000020965">Sucess story of SRI Odia PRAGATI Odisha (NILADORAPUT)</option>
+									<option value="10000000019693">Sugarcane planting (Gunthaguda(C))</option>
+									<option value="10000000020712">Summer ploughing (Kothaghar)</option>
+									<option value="10000000020555">Summer Season 1st weeding in SRI paddy   (Sunpokhari)</option>
+									<option value="10000000020556">Summer Season 1st weeding in SRI paddy   (Sunpokhari)</option>
+									<option value="10000000020557">Summer Season 2nd Weeding in SRI Paddy  (Tintia)</option>
+									<option value="10000000020586">Sunflower 1st Earthing up  (Deuli)</option>
+									<option value="10000000020904">Sunflower Earthing up (Deuli)</option>
+									<option value="10000000020499">Sustainable preservation of Azolla (Belguda)</option>
+									<option value="10000000020918">Taking care of the Tassar eggmass and larvae (Ghatbalijodi)</option>
+									<option value="10000000020540">Tamarind pickle making (Rudhiapada)</option>
+									<option value="10000000020565">Tamarind processing Odia PRAGATI Odisha (Dongri)</option>
+									<option value="10000000020954">Tasar Cultivation (Chhatia)</option>
+									<option value="10000000000424">Tassar rearing introduction (Palsagadia)</option>
+									<option value="10000000020502">Technique of conserving rain water  (Belguda)</option>
+									<option value="10000000020071">Technique of oil extraction from Karanja seed Oriya Pragati Odisha (Janiguda)</option>
+									<option value="10000000000425">Technique of oil extraction from Simarouba seed (Pragati) (Jamadarguda)</option>
+									<option value="10000000019772">Technique of Pumpkin cultivation Oriya Pragati Odisha (Bilaput(C))</option>
+									<option value="10000000021058">testing delete ( 	Banapadar)</option>
+									<option value="10000000021059">testing delete 12 ( 	Banapadar)</option>
+									<option value="10000000019103">Tobacco leaves for controling pest in vegetables (Pragati) (Putpondi)</option>
+									<option value="10000000019236">Tomato cultivation in upland (Belguda)</option>
+									<option value="10000000019376">Tomato fertilizer application (Sangaon)</option>
+									<option value="10000000020996">Tomato Harvest  (Baria)</option>
+									<option value="10000000019372">Tomato Hormone Spray (Badagaon)</option>
+									<option value="10000000019319">Tomato Nursery Bed (Sangaon)</option>
+									<option value="10000000020910">Tomato Nursery bed preparation in line method_Odia_PRAGATI_Odisha (Hanjar Phento(c))</option>
+									<option value="10000000020457">Tomato plucking – A success story (Badanuagaon)</option>
+									<option value="10000000019099">Tomato seed bed preparation (Putpondi)</option>
+									<option value="10000000020277">Tomato seedling raising (Banamahuladiha)</option>
+									<option value="10000000000026">Tomato Sowing (Palsagadia)</option>
+									<option value="10000000000034">Tomato Sowing (Deuli)</option>
+									<option value="10000000000234">Tomato Sowing_Karanjia_Oriya (Deuli)</option>
+									<option value="10000000000133">Tomato spray (Ektali)</option>
+									<option value="10000000020498">Top dressing for ridge gourd crop during Rabi season (Talapada)</option>
+									<option value="10000000020407">Traditional harvesting techniques in paddy cultivation (Mohadeiput(C))</option>
+									<option value="18000001110">Transplantation of chilli seedlings in rainy season (MALIPUT)</option>
+									<option value="10000000019575">Transplantation of Onion seedling in winter season Oriya Pragati Odisha (Musriaguda)</option>
+									<option value="10000000019208">Transplanting in cabbage cultivation (Mushakhori)</option>
+									<option value="10000000020166">Transplanting in cabbage cultivation  (BALDA)</option>
+									<option value="10000000000433">Transplanting in SRI Method (Begunakhaman)</option>
+									<option value="10000000019283">Transplanting method of Cauliflower seedling Oriya Pragati Odisha (Dongari Maliguda)</option>
+									<option value="10000000000038">Transplanting of chilli (Ektali)</option>
+									<option value="10000000019243">Transplanting of chilli seedlings (Kothaghar)</option>
+									<option value="10000000020147">Transplanting of Lalata Paddy (Kothaghar)</option>
+									<option value="10000000020571">Transplanting of little gourd in field Odia PRAGATI Odisha  (KOTPAD)</option>
+									<option value="10000000020172">Transplanting of Marigold Saplings (Karanguda)</option>
+									<option value="10000000000358">Transplanting of seedlings of brinjal crop  (Kumulabahali)</option>
+									<option value="10000000019141">Transplanting technique in caulliflower cultivation (Badanuagaon)</option>
+									<option value="10000000019308">Transplanting technique in onion cultivation (Rohiniduma)</option>
+									<option value="10000000019140">Transplanting technique in tomato cultivation (Badanuagaon)</option>
+									<option value="10000000000391">Treatment of brinjal seedlings  (Kumulabahali)</option>
+									<option value="10000000020993">Treatment of Colour Fish in Nursery pond (Chakundapal)</option>
+									<option value="10000000000395">Treatment of nursery bed in paddy cultivation (Erendei)</option>
+									<option value="10000000020087">Treatment of paddy seeds using salt water (Akhapalan)</option>
+									<option value="10000000020767">Treatment of turmeric rhizomes in local method Odia PRAGATI Odisha (KUKUDAPUT)</option>
+									<option value="18000001034">Turmeric Bed Mulching (ARLABPUT)</option>
+									<option value="10000000020731">TURMERIC PLANTING_Odia_PRAGATI_Odisha (KUKUDAPUT)</option>
+									<option value="10000000019886">Turmeric Processing (MANGREL)</option>
+									<option value="10000000019892">TURMERIC SEED TREATMENT IN ORGANIC METHOD (Ghodadora)</option>
+									<option value="10000000019577">Turnip Transplanting (Dongari Maliguda)</option>
+									<option value="10000000019820">Use of growth promoter(Hormone)in Pumpkin. (Sankarpur)</option>
+									<option value="10000000020710">Use of low cost hand operated oil extraction unit Odia PRAGATI Odisha (BODONG)</option>
+									<option value="10000000019756">Vaccination of Banaraj Chicks (Banamahuladiha)</option>
+									<option value="10000000019105">Variety Seed Treatment (Ekdeli)</option>
+									<option value="10000000000388">VERMI (Dalaiput)</option>
+									<option value="10000000019317">Vermicompost (Kadadhia)</option>
+									<option value="10000000019568">Village level sports (Khaparkhai )</option>
+									<option value="10000000020839">Weed Control from Paddy Field (Shyamasundarpur)</option>
+									<option value="10000000020867">Weed Management in Ragi _Odia_PRAGATI_Odisha (RAISING)</option>
+									<option value="10000000000230">Weeder Application in Line sown Paddy (Kendumundhi)</option>
+									<option value="10000000000244">Weeder Application in SRI Paddy_Karanjia_Oriya (Khandbandha)</option>
+									<option value="10000000020052">Weeding and fertilizer application in brinjal (Kalighai)</option>
+									<option value="10000000000438">Weeding and fertilizer application in pumpkin cultivation (Kumulabahali)</option>
+									<option value="10000000020175">Weeding and hoeing in bean cultivation (Dhudurupal)</option>
+									<option value="10000000000440">Weeding by cono weeder in SRI method (Kothaghar)</option>
+									<option value="10000000000419">Weeding in SRI by weeder (PRAGATI) (Gunthaguda(C))</option>
+									<option value="10000000019369">Wheat Line Sowing (Kadadhia)</option>
+									<option value="10000000019725">Worm and disease management in goatery. (Banamahuladiha)</option>
+									<option value="10000000019990">YAM SEED PLANTING METHOD (Belguda)</option>
+									<option value="10000000019771">Yam seed treatment Oriya Pragati Odisha (Mastiguda)</option>
                                 </select> 
                                 	</div>
                                 </div>
                                 <div class="control-group">
                                 	<label>Groups Attended*</label>
 	                                <div class="controls">
-	                                    <select id="id_group_screening" multiple="multiple"></select> 
-	                                    <i class="icon-arrow-right"></i>
-	                                    <select name="group_screening" id="id_group_screening_right" multiple="multiple"></select>
+	                                    <select id="id_group_screening" class="chzn-select input-xlarge" multiple="multiple"></select> 
+	                                    
 	                                </div>
                                 </div>
                                 <div class="control-group">
                                 	<label>Person</label>
                                 	<div class="controls">
-		                                <select id="id_person_screening" multiple="multiple"></select>
-	                                	<i class="icon-arrow-right"></i>
-	                                	<select name="person_screening" id="id_person_screening_right" multiple="multiple"></select>
+		                                <select id="id_person_screening" multiple="multiple" class="chzn-select input-xlarge"></select>
+	                                	
 	                                </div>
                                 </div>
                                     <br>
@@ -1954,12 +2185,6 @@
                                                 Person
                                             </th>
                                             <th>
-                                                Expressed Adopted Video
-                                            </th>
-                                            <th>
-                                                Question Asked
-                                            </th>
-                                            <th>
                                                 Interested?
                                             </th>
                                         </tr>
@@ -1968,6 +2193,7 @@
                                     </tbody>
                                 </table>
                             </fieldset><button type="submit" class="btn">Submit</button>
+							<div id="screening_reset" class="pull-right btn btn-danger" >Reset</div>
                         </form>
                     </div>
                     <div  id="adoption_tab">
@@ -1977,23 +2203,21 @@
                                 <div class="control-group">
                                 	<label class="control-label">Village*</label>
                                 	<div class="controls"> 
-                                	<select name="village_adoption" id="id_village_adoption"><option value="">---------- </option><option value="10000000000337">Bhallapur</option><option value="10000000000339">Dhanurjayapuram</option></select>
+                                	<select class="chzn-select input-xlarge" name="village_adoption" id="id_village_adoption"><option value="">---------- </option><option value="10000000000337">Bhallapur</option><option value="10000000000339">Dhanurjayapuram</option></select>
                                 	</div>
                                 </div>
                                 <div class="control-group">
                                 	<label>Groups Attended*</label>
 	                                <div class="controls">
-	                                    <select id="id_group_adoption" multiple="multiple"></select> 
-	                                    <i class="icon-arrow-right"></i>
-	                                    <select name="group_adoption" id="id_group_adoption_right" multiple="multiple"></select>
+	                                    <select id="id_group_adoption" class="chzn-select input-xlarge" multiple="multiple"></select> 
+	                                    
 	                                </div>
                                 </div>
                                 <div class="control-group">
                                 	<label>Person</label>
                                 	<div class="controls">
-		                                <select id="id_person_adoption" multiple="multiple"></select>
-	                                	<i class="icon-arrow-right"></i>
-	                                	<select name="person_adoption" id="id_person_adoption_right" multiple="multiple"></select>
+		                                <select id="id_person_adoption" class="chzn-select input-xlarge" multiple="multiple"></select>
+	                                	
 	                                </div>
                                 </div>
                                     <br>
@@ -2025,6 +2249,7 @@
                                     </tbody>
                                 </table>
                             </fieldset><button type="submit" class="btn">Submit</button>
+							<div id="screening_reset" class="pull-right btn btn-danger" >Reset</div>
                         </form>
                         <!-- <form id="adopiton_form">
                             <fieldset>
